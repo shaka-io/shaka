@@ -8,5 +8,7 @@
     { "path": "./packages/dev/tsconfig.spec.json" },
     { "path": "./packages/env/tsconfig.build.json" },
     { "path": "./packages/env/tsconfig.spec.json" },
+    { "path": "./packages/library/tsconfig.build.json" },
+    { "path": "./packages/library/tsconfig.spec.json" },
   ]
 }

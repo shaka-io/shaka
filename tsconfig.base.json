@@ -19,6 +19,8 @@
       "@shaka-js/dev/*": ["dev/src/*"],
       "@shaka-js/env": ["env/src"],
       "@shaka-js/env/*": ["env/src/*"],
+      "@shaka-js/library": ["library/src"],
+      "@shaka-js/library/*": ["library/src/*"],
     }
   }
 }

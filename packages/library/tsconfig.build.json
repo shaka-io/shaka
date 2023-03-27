@@ -3,17 +3,19 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "lib",
-    "rootDir": "./src",
+    "rootDir": "src",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "resolveJsonModule": true
   },
   "include": ["src/**/*"],
   "exclude": [],
   "references": [
     {
-      "path": "../env/tsconfig.build.json"
+      "path": "../dev/tsconfig.build.json"
     },
     {
-      "path": "../library/tsconfig.build.json"
+      "path": "../env/tsconfig.build.json"
     },
   ]
 }
