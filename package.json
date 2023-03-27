@@ -1,0 +1,37 @@
+{
+  "author": "devops@shaka.website",
+  "bugs": "https://github.com/shaka-io/shaka/issues",
+  "homepage": "https://github.com/shaka-io/shaka#readme",
+  "license": "AGPL-3.0",
+  "name": "root",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "ssh://github.com/shaka-io/shaka.git"
+  },
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ]
+  },
+  "scripts": {
+    "build": "npx lerna run build --stream",
+    "lint": "eslint --ext .ts,.tsx packages --fix",
+    "lint:all": "npx lerna run lint --stream --parallel",
+    "test": "yarn jest --coverage"
+  },
+  "devDependencies": {
+    "@tsconfig/node16": "1.0.3",
+    "@types/jest": "^28.1.8",
+    "@types/node": "^18.7.14",
+    "@wavesrcool/dev": "^0.1.5",
+    "jest": "^28.0.0",
+    "lerna": "^5.6.2",
+    "ts-jest": "^28.0.8",
+    "ts-node": "^10.9.1"
+  },
+  "resolutions": {
+    "typescript": "4.8.4"
+  }
+}
