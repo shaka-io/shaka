@@ -1,0 +1,68 @@
+{
+  "author": "devops@shaka.website",
+  "bugs": "https://github.com/shaka-io/shaka/issues",
+  "homepage": "https://github.com/shaka-io/shaka/tree/main/packages/models#readme",
+  "contributors": [],
+  "description": "",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "license": "AGPL-3.0",
+  "name": "@shaka-js/models",
+  "repository": {
+    "directory": "packages/models",
+    "type": "git",
+    "url": "ssh://github.com/shaka-io/shaka.git"
+  },
+  "type": "commonjs",
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "./lib",
+    ".env.models"
+  ],
+  "keywords": [
+    "shaka",
+    "models",
+    "es6",
+    "node"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "scripts": {
+    "ci-env": "shaka-collect-env-example models",
+    "ci": "yarn ci-env && yarn lint",
+    "w": "tsc -w",
+    "0l": "rm -rf lib",
+    "0t": "rm -f tsconfig*tsbuildinfo",
+    "c": "yarn 0l && yarn 0t && tsc --project tsconfig.build.json",
+    "lint": "eslint './src/**/*.{ts,tsx}' --max-warnings=1 --fix",
+    "build": "yarn ci && yarn c",
+    "build-dev": "yarn lint && yarn c",
+    "prepack": "yarn build",
+    "test": "yarn jest",
+    "update": "rm -rf node_modules && yarn",
+    "db:connection": "yarn typeorm-ts-node-commonjs -d ./src/database/connection.ts",
+    "db:cycle": "yarn db:drop && yarn db:migration:remove && yarn build && yarn db:migration:gen && yarn build && yarn db:migration:run",
+    "db:drop": "yarn db:connection schema:drop",
+    "db:migration:gen": "yarn db:connection migration:generate ./src/database/migrations/Shaka --timestamp",
+    "db:migration:run": "yarn db:connection migration:run",
+    "db:migration:remove": "rm src/database/migrations/* || true"
+  },
+  "devDependencies": {
+    "@shaka-js/dev": "^0.0.0",
+    "@faker-js/faker": "^7.6.0",
+    "@types/dotenv-safe": "^8.1.2"
+  },
+  "dependencies": {
+    "@shaka-js/env": "^0.0.0",
+    "class-validator": "0.13.2",
+    "dotenv-safe": "^8.2.0",
+    "reflect-metadata": "0.1.13",
+    "type-graphql": "2.0.0-beta.1",
+    "typeorm": "0.3.10",
+    "typeorm-extension": "^2.3.0"
+  }
+}

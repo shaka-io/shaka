@@ -17,7 +17,8 @@
   "type": "commonjs",
   "version": "0.0.0",
   "bin": {
-    "shaka-files-rename": "lib/bins/files-rename/main.js"
+    "shaka-files-rename": "lib/bins/files-rename/main.js",
+    "shaka-collect-env-example": "lib/bins/collect-env-example/main.js"
   },
   "files": [
     "./lib"
