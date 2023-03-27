@@ -3,5 +3,8 @@
     "composite": true
   },
   "files": [],
-  "references": []
+  "references": [
+    { "path": "./packages/env/tsconfig.build.json" },
+    { "path": "./packages/env/tsconfig.spec.json" },
+  ]
 }

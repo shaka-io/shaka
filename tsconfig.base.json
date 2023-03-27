@@ -14,5 +14,9 @@
     "noUncheckedIndexedAccess": true,
     "skipLibCheck": true,
     "emitDecoratorMetadata": true,
+    "paths": {
+      "@shaka-js/env": ["env/src"],
+      "@shaka-js/env/*": ["env/src/*"],
+    }
   }
 }
