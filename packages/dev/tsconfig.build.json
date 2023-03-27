@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "lib",
+    "rootDir": "./src",
+    "resolveJsonModule": true
+  },
+  "include": ["src/**/*"],
+  "exclude": [],
+  "references": [
+    {
+      "path": "../env/tsconfig.build.json"
+    },
+  ]
+}

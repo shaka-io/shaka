@@ -1,0 +1,59 @@
+{
+  "author": "devops@shaka.website",
+  "bugs": "https://github.com/shaka-io/shaka/issues",
+  "homepage": "https://github.com/shaka-io/shaka/tree/main/packages/dev#readme",
+  "contributors": [],
+  "description": "",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "license": "AGPL-3.0",
+  "name": "@shaka-js/dev",
+  "repository": {
+    "directory": "packages/dev",
+    "type": "git",
+    "url": "ssh://github.com/shaka-io/shaka.git"
+  },
+  "type": "commonjs",
+  "version": "0.0.0",
+  "bin": {
+    "shaka-files-rename": "lib/bins/files-rename/main.js"
+  },
+  "files": [
+    "./lib"
+  ],
+  "keywords": [
+    "shaka",
+    "dev",
+    "es6",
+    "node"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "scripts": {
+    "ci": "yarn lint",
+    "w": "tsc -w",
+    "0l": "rm -rf lib",
+    "0t": "rm -f tsconfig*tsbuildinfo",
+    "c": "yarn 0l && yarn 0t && tsc --project tsconfig.build.json",
+    "lint": "eslint './src/**/*.{ts,tsx}' --max-warnings=0 --fix",
+    "build": "yarn ci && yarn c && yarn executable-bins",
+    "build-dev": "yarn lint && yarn c && yarn executable-bins",
+    "prepack": "yarn build",
+    "test": "yarn jest",
+    "executable-bins": "chmod u+x ./lib/bins/**/main.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.0.0",
+    "@types/jsonfile": "^6.1.0",
+    "@types/lodash": "^4.14.185",
+    "@types/yargs": "^17.0.12"
+  },
+  "dependencies": {
+    "glob": "^8.0.3",
+    "jsonfile": "^6.1.0",
+    "lodash": "^4.17.21",
+    "yargs": "^17.5.1"
+  }
+}
