@@ -8,7 +8,7 @@
     "node": ">=14.0.0"
   },
   "license": "AGPL-3.0",
-  "name": "@shaka-js/library",
+  "name": "@shaka/library",
   "repository": {
     "directory": "packages/library",
     "type": "git",
@@ -44,8 +44,8 @@
     "update": "rm -rf node_modules && yarn"
   },
   "dependencies": {
-    "@shaka-js/dev": "^0.0.0",
-    "@shaka-js/env": "^0.0.0",
+    "@shaka/dev": "^0.0.0",
+    "@shaka/env": "^0.0.0",
     "axios": "^1.2.2",
     "jshashes": "^1.0.8",
     "uuid": "^9.0.0"

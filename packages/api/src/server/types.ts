@@ -1,4 +1,4 @@
-import ModelsConnection from "@shaka-js/models";
+import ModelsConnection from "@shaka/models";
 import { Request, Response } from "express";
 import { Session, SessionData } from "express-session";
 import Redis from "ioredis";

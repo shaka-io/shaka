@@ -8,7 +8,7 @@
     "node": ">=14.0.0"
   },
   "license": "AGPL-3.0",
-  "name": "@shaka-js/models",
+  "name": "@shaka/models",
   "repository": {
     "directory": "packages/models",
     "type": "git",
@@ -52,12 +52,12 @@
     "db:migration:remove": "rm src/database/migrations/* || true"
   },
   "devDependencies": {
-    "@shaka-js/dev": "^0.0.0",
+    "@shaka/dev": "^0.0.0",
     "@faker-js/faker": "^7.6.0",
     "@types/dotenv-safe": "^8.1.2"
   },
   "dependencies": {
-    "@shaka-js/env": "^0.0.0",
+    "@shaka/env": "^0.0.0",
     "class-validator": "0.13.2",
     "dotenv-safe": "^8.2.0",
     "reflect-metadata": "0.1.13",

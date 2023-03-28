@@ -8,7 +8,7 @@
     "node": ">=14.0.0"
   },
   "license": "AGPL-3.0",
-  "name": "@shaka-js/voltage",
+  "name": "@shaka/voltage",
   "repository": {
     "directory": "packages/voltage",
     "type": "git",
@@ -44,10 +44,10 @@
     "update": "rm -rf node_modules && yarn"
   },
   "devDependencies": {
-    "@shaka-js/dev": "^0.0.0"
+    "@shaka/dev": "^0.0.0"
   },
   "dependencies": {
-    "@shaka-js/env": "^0.0.0",
+    "@shaka/env": "^0.0.0",
     "axios": "^1.2.2"
   }
 }

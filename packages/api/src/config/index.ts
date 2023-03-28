@@ -1,4 +1,4 @@
-import { env } from "@shaka-js/env";
+import { env } from "@shaka/env";
 import { TypesConfiguration } from "./types";
 
 const { PROD } = env;

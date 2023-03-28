@@ -1,8 +1,8 @@
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
-import { env } from "@shaka-js/env";
-import ModelsConnection from "@shaka-js/models";
+import { env } from "@shaka/env";
+import ModelsConnection from "@shaka/models";
 import { json } from "body-parser";
 import connectRedis from "connect-redis";
 import session from "express-session";

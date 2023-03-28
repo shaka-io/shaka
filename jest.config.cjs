@@ -1,7 +1,7 @@
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 const { resolve, join } = require("path");
 const { lstatSync, readdirSync } = require("fs");
-const scope = `@shaka-js`
+const scope = `@shaka`
 const directory = resolve(__dirname, `packages`);
 const list = readdirSync(directory).filter((read) =>
   lstatSync(join(directory, read)).isDirectory()

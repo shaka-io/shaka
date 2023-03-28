@@ -1,1 +1,1 @@
-# @shaka-js/env
+# @shaka/env

@@ -1,1 +1,1 @@
-# @shaka-js/dev
+# @shaka/dev

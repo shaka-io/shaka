@@ -8,7 +8,7 @@
     "node": ">=14.0.0"
   },
   "license": "AGPL-3.0",
-  "name": "@shaka-js/env",
+  "name": "@shaka/env",
   "repository": {
     "directory": "packages/env",
     "type": "git",

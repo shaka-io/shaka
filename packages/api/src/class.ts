@@ -1,5 +1,5 @@
-import { env } from "@shaka-js/env";
-import ModelsConnection from "@shaka-js/models";
+import { env } from "@shaka/env";
+import ModelsConnection from "@shaka/models";
 import { server } from "./server";
 import { envapi } from "./_env";
 
