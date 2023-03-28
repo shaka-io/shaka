@@ -1,6 +1,6 @@
 # shaka
 
-A Node.js client-server architecture for sending & fetching email.
+A Node.js client-server architecture for Shaka. 
 
 ## Overview
 
