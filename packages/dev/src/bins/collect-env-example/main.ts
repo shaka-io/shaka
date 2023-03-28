@@ -9,7 +9,7 @@ const argenv = getArgv().toLowerCase();
 const main = () => {
   let msg = `[ci-env-example]`;
 
-  if (!["models"].includes(argenv)) {
+  if (!["models", "api"].includes(argenv)) {
     msg += ` - specified unknown environment`;
     throw new Error(msg);
   }
@@ -19,6 +19,26 @@ const main = () => {
 
   if (argenv === "models") {
     ws += `
+MODELS_DB=
+`;
+  }
+
+  if (argenv === "api") {
+    ws += `
+API_PORT=
+API_CORS_ORIGIN=
+API_REDIS_PORT=
+API_COOKIE_NAME=
+API_COOKIE_IV=
+API_TOK_IV=
+API_HASH_IV=
+API_ENC_IV=
+API_MAIL_BASE=
+API_MAIL_KEY=
+API_MAIL_SIGN=
+
+LIBRARY_HASH_IV=
+
 MODELS_DB=
 `;
   }
