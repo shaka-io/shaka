@@ -12,8 +12,5 @@
     {
       "path": "../env/tsconfig.build.json"
     },
-    {
-      "path": "../library/tsconfig.build.json"
-    },
   ]
 }

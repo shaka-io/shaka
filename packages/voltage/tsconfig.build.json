@@ -17,14 +17,5 @@
     {
       "path": "../env/tsconfig.build.json"
     },
-    {
-      "path": "../library/tsconfig.build.json"
-    },
-    {
-      "path": "../models/tsconfig.build.json"
-    },
-    {
-      "path": "../voltage/tsconfig.build.json"
-    }
   ]
 }

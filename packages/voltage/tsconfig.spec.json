@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "lib",
+    "rootDir": "src",
+    "emitDeclarationOnly": false,
+    "noEmit": true
+  },
+  "include": ["**/*.spec.ts", "**/*.test.ts"],
+  "references": []
+}

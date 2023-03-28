@@ -25,6 +25,8 @@
       "@shaka-js/library/*": ["library/src/*"],
       "@shaka-js/models": ["models/src"],
       "@shaka-js/models/*": ["models/src/*"],
+      "@shaka-js/voltage": ["voltage/src"],
+      "@shaka-js/voltage/*": ["voltage/src/*"],
     }
   }
 }

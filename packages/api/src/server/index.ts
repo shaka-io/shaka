@@ -12,6 +12,7 @@ import { buildSchema } from "type-graphql";
 import "websocket-polyfill";
 import { app } from "../app";
 import { ClassesApi } from "../classes";
+import { ShakaGraphLnInfo } from "../resolvers/ln/info/shaka-graph-ln-info-resolver";
 import { ShakaGraph0000 } from "../resolvers/numeric/0000/shaka-graph-0000-resolver";
 import { envapi } from "../_env";
 import { TypesServerContext } from "./types";
@@ -30,7 +31,7 @@ export const server = async (
     const httpServer = http.createServer(app);
 
     const schema = await buildSchema({
-      resolvers: [ShakaGraph0000],
+      resolvers: [ShakaGraph0000, ShakaGraphLnInfo],
       scalarsMap: [],
       validate: false,
       globalMiddlewares: [],

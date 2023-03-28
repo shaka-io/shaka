@@ -1,0 +1,53 @@
+{
+  "author": "devops@shaka.website",
+  "bugs": "https://github.com/shaka-io/shaka/issues",
+  "homepage": "https://github.com/shaka-io/shaka/tree/main/packages/voltage#readme",
+  "contributors": [],
+  "description": "",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "license": "AGPL-3.0",
+  "name": "@shaka-js/voltage",
+  "repository": {
+    "directory": "packages/voltage",
+    "type": "git",
+    "url": "ssh://github.com/shaka-io/shaka.git"
+  },
+  "type": "commonjs",
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "./lib"
+  ],
+  "keywords": [
+    "shaka",
+    "voltage",
+    "es6",
+    "node"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "scripts": {
+    "ci": "yarn lint",
+    "w": "tsc -w",
+    "0l": "rm -rf lib",
+    "0t": "rm -f tsconfig*tsbuildinfo",
+    "c": "yarn 0l && yarn 0t && tsc --project tsconfig.build.json",
+    "lint": "eslint './src/**/*.{ts,tsx}' --max-warnings=1 --fix",
+    "build": "yarn ci && yarn c",
+    "build-dev": "yarn lint && yarn c",
+    "prepack": "yarn build",
+    "test": "yarn jest",
+    "update": "rm -rf node_modules && yarn"
+  },
+  "devDependencies": {
+    "@shaka-js/dev": "^0.0.0"
+  },
+  "dependencies": {
+    "@shaka-js/env": "^0.0.0",
+    "axios": "^1.2.2"
+  }
+}
