@@ -1,0 +1,13 @@
+overwrite: true
+schema: "http://localhost:4000/graph"
+documents: ["documents/**/*.graphql"]
+hooks:
+  afterAllFileWrite:
+    - eslint --fix
+    - prettier --write
+generates:
+  src/library/graph/hooks/index.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"

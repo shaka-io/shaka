@@ -1,0 +1,47 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "baseUrl": "./src",
+    "module": "esnext",
+    "target": "es6",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "skipLibCheck": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "incremental": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "allowUnusedLabels": true,
+    "allowUnreachableCode": true,
+    "allowJs": true,
+    "paths": {
+      "@shaka-web-env/*": ["_env/*"],
+      "@shaka-web-components/*": ["components/*"],
+      "@shaka-web-configuration/*": ["configuration/*"],
+      "@shaka-web-features/*": ["features/*"],
+      "@shaka-web-hooks/*": ["hooks/*"],
+      "@shaka-web-library/*": ["library/*"],
+      "@shaka-web-shapes/*": ["shapes/*"],
+      "@shaka-web-styles/*": ["styles/*"],
+      "@shaka-web-types/*": ["types/*"]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", "__local__", "__edit__"]
+}
