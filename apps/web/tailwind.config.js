@@ -45,13 +45,16 @@ const darken = (clr, val) => Color(clr).darken(val).rgb().string();
 
 const shakacolors = {
   primary: {
-    relief: "#3d4451",
+    relief: "#FFAE9D",
   },
   secondary: {
     relief: "#FEFDFE",
   },
   accent: {
     relief: `#FFF2C8`,
+  },
+  neutral: {
+    relief: `#F4F5F5`,
   },
 };
 
@@ -165,7 +168,10 @@ module.exports = {
           "accent-focus": "#C9A401", // "#C9AB01",
           "accent-content": "#9F8100", // "#9F8700",
 
-          neutral: "#3d4451",
+          neutral: "#CDD6D6",
+          "neutral-focus": "#9CB1B1",
+          "neutral-content": "#6E9090",
+
           "base-100": "#fefefe",
 
           "--rounded-box": "1rem", // border radius rounded-box utility class, used in card and other large boxes

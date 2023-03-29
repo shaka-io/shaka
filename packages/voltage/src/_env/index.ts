@@ -11,17 +11,18 @@ if (!VOLTAGE_BASE_URL) {
   throw new Error(msg);
 }
 
-let VOLTAGE_MACAROON = ``;
-
-const rdir = path.join(process.cwd(), `admin.macaroon`);
-if (!fs.existsSync(rdir)) {
-  msg = `VOLTAGE_MACAROON directory does not exist`;
-  throw new Error(msg);
-}
-VOLTAGE_MACAROON = fs.readFileSync(rdir).toString(`hex`);
+let VOLTAGE_MACAROON = process.env.VOLTAGE_MACAROON || ``;
 if (!VOLTAGE_MACAROON) {
-  msg = `process.env.VOLTAGE_MACAROON`;
-  throw new Error(msg);
+  const rdir = path.join(process.cwd(), `admin.macaroon`);
+  if (!fs.existsSync(rdir)) {
+    msg = `VOLTAGE_MACAROON directory does not exist`;
+    throw new Error(msg);
+  }
+  VOLTAGE_MACAROON = fs.readFileSync(rdir).toString(`hex`);
+  if (!VOLTAGE_MACAROON) {
+    msg = `process.env.VOLTAGE_MACAROON`;
+    throw new Error(msg);
+  }
 }
 
 export const envvoltage: TypesVoltageEnv = {
