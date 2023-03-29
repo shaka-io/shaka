@@ -15,7 +15,7 @@
     "url": "ssh://github.com/shaka-io/shaka.git"
   },
   "type": "commonjs",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
@@ -63,7 +63,7 @@
     "@shaka-js/env": "^0.1.1",
     "@shaka-js/library": "^0.1.1",
     "@shaka-js/models": "^0.1.1",
-    "@shaka-js/voltage": "^0.1.1",
+    "@shaka-js/voltage": "^0.1.2",
     "body-parser": "^1.20.2",
     "class-validator": "^0.14.0",
     "connect-redis": "^6.1.3",

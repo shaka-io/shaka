@@ -14,7 +14,7 @@
     "type": "git",
     "url": "ssh://github.com/shaka-io/shaka.git"
   },
-  "version": "1.1.1",
+  "version": "1.1.2",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
