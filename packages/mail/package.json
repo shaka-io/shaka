@@ -15,7 +15,7 @@
     "url": "ssh://github.com/shaka-io/shaka.git"
   },
   "type": "commonjs",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
@@ -47,7 +47,7 @@
   "dependencies": {
     "@shaka-js/env": "^0.2.1",
     "@shaka-js/library": "^0.2.1",
-    "@shaka-js/models": "^0.2.1",
+    "@shaka-js/models": "^0.2.2",
     "axios": "^1.2.2",
     "form-data": "^4.0.0",
     "mailgun.js": "^8.0.6"
