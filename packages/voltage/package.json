@@ -15,7 +15,7 @@
     "url": "ssh://github.com/shaka-io/shaka.git"
   },
   "type": "commonjs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
@@ -45,10 +45,10 @@
     "update": "rm -rf node_modules && yarn"
   },
   "devDependencies": {
-    "@shaka/dev": "^0.0.1"
+    "@shaka/dev": "^0.0.2"
   },
   "dependencies": {
-    "@shaka/env": "^0.0.1",
+    "@shaka/env": "^0.0.2",
     "axios": "^1.2.2"
   },
   "gitHead": "47d5ca4824861161bbf94f4dcb8e2932a37e00a5"
