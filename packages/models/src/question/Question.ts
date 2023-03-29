@@ -40,6 +40,10 @@ export class Question extends BaseEntity {
 
   @Field(() => String)
   @Column({ type: `varchar` })
+  contact!: string;
+
+  @Field(() => String)
+  @Column({ type: `varchar` })
   content!: string;
 
   //

@@ -18,7 +18,7 @@ const main = (find: string, replace: string) => {
     process.cwd(),
     argFolder,
     "**",
-    `*.{ts,tsx,json,graphql${extratypes || ``}}`
+    `*.{ts,tsx,json,graphql,md${extratypes || ``}}`
   );
   const files = glob.sync(globpath);
   if (!files || !files.length) {

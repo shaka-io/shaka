@@ -55,7 +55,7 @@ export class ShakaApi {
       }
 
       if (ENV === "dev") {
-        console.log(`[shaka-api] (catch) Error. ${message}`);
+        console.log(`[shaka-api] (catch) ${message}`);
         console.log(e);
       }
     }
