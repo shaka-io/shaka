@@ -15,7 +15,7 @@
     "url": "ssh://github.com/shaka-io/shaka.git"
   },
   "type": "commonjs",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
@@ -61,8 +61,8 @@
     "@shaka-js/env": "^0.2.1",
     "class-validator": "0.13.2",
     "dotenv-safe": "^8.2.0",
-    "reflect-metadata": "0.1.13",
     "graphql": "^16.6.0",
+    "reflect-metadata": "0.1.13",
     "type-graphql": "2.0.0-beta.1",
     "typeorm": "0.3.10",
     "typeorm-extension": "^2.3.0"
