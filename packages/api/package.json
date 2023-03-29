@@ -15,7 +15,7 @@
     "url": "ssh://github.com/shaka-io/shaka.git"
   },
   "type": "commonjs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
@@ -50,7 +50,7 @@
     "dev": "node lib/run.js"
   },
   "devDependencies": {
-    "@shaka-js/dev": "^0.0.3",
+    "@shaka-js/dev": "^0.0.4",
     "@types/body-parser": "^1.19.2",
     "@types/connect-redis": "^0.0.20",
     "@types/cors": "^2.8.13",
@@ -60,10 +60,10 @@
   },
   "dependencies": {
     "@apollo/server": "^4.4.0",
-    "@shaka-js/env": "^0.0.3",
-    "@shaka-js/library": "^0.0.3",
-    "@shaka-js/models": "^0.0.3",
-    "@shaka-js/voltage": "^0.0.3",
+    "@shaka-js/env": "^0.0.4",
+    "@shaka-js/library": "^0.0.4",
+    "@shaka-js/models": "^0.0.4",
+    "@shaka-js/voltage": "^0.0.4",
     "body-parser": "^1.20.2",
     "class-validator": "^0.14.0",
     "connect-redis": "^6.1.3",
