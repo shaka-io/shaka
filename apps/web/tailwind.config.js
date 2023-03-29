@@ -48,7 +48,10 @@ const shakacolors = {
     relief: "#3d4451",
   },
   secondary: {
-    relief: "#FFF2C8",
+    relief: "#FEFDFE",
+  },
+  accent: {
+    relief: `#FFF2C8`,
   },
 };
 
@@ -118,6 +121,12 @@ module.exports = {
             darker: darken(shakacolors.secondary.relief, 0.1),
             75: alpha(shakacolors.secondary.relief, 0.75),
           },
+          accent_relief: {
+            DEFAULT: shakacolors.accent.relief,
+            lighter: lighten(shakacolors.accent.relief, 0.1),
+            darker: darken(shakacolors.accent.relief, 0.1),
+            75: alpha(shakacolors.accent.relief, 0.75),
+          },
         },
       },
     },
@@ -148,15 +157,14 @@ module.exports = {
           "primary-focus": "#C50A0A",
           "primary-content": "#9C0000",
 
-          secondary: "#D5C0DE", // "#896A8F",
+          secondary: "#D5C0DE",
           "secondary-focus": "#714B79",
           "secondary-content": "#5A3263",
 
-          // secondary: "#DFC36A",
-          // "secondary-focus": "#B89B3D",
-          // "secondary-content": "#94771C",
+          accent: "#FACF14", // "#FAD714",
+          "accent-focus": "#C9A401", // "#C9AB01",
+          "accent-content": "#9F8100", // "#9F8700",
 
-          accent: "#37cdbe",
           neutral: "#3d4451",
           "base-100": "#fefefe",
 

@@ -1,8 +1,17 @@
 {
+  "fiat": "Fiat",
+  "please_use_a_valid_email": "Please use a valid email",
+  "please_write_3_words_minimum": "Please write 3 words minimum",
+  "name": "Name",
+  "email": "Email",
+  "submit": "Submit",
   "join_our_crowdfund": "Join our crowdfund",
   "made_with_love_in": "Made with love in",
   "page_not_found": "Page not found",
   "all_rights_reserved": "All rights reserved",
   "copyright": "Copyright",
-  "generate": "Generate"
+  "generate": "Generate",
+  "get_in_touch": "Get in touch",
+  "lightning": "Lightning",
+  "donation": "Donation"
 }

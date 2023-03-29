@@ -1,6 +1,6 @@
 import { ShakaFooter } from "@shaka-web-components/footer/ShakaFooter";
 import { ShakaNavigation } from "@shaka-web-components/navigation/ShakaNavigation";
-import { ShakaFundraiseForm } from "@shaka-web-features/fundraise/form/ShakaFundraiseForm";
+import { ShakaContactForm } from "@shaka-web-features/contact/form/ShakaContactForm";
 import { useShape } from "@shaka-web-shapes/hooks";
 import { ofRootShape } from "@shaka-web-shapes/root/RootShape";
 import { TypesShakaBasis } from "@shaka-web-types/basis/TypesShakaBasis";
@@ -9,20 +9,19 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import * as React from "react";
 
-export type TypesShakaFundraiseOrigin = {
+export type TypesShakaContactOrigin = {
   basis: TypesShakaBasis;
 };
 
-export const ShakaFundraiseOrigin: React.FC<TypesShakaFundraiseOrigin> = ({
+export const ShakaContactOrigin: React.FC<TypesShakaContactOrigin> = ({
   basis,
-}: TypesShakaFundraiseOrigin) => {
+}: TypesShakaContactOrigin) => {
   const { t } = useTranslation(basis.dictionary);
 
   const RootShape = useShape(ofRootShape);
-
   const router = useRouter();
 
-  const lcShakaFundraiseOriginToHome = React.useCallback(() => {
+  const lcShakaContactOriginToHome = React.useCallback(() => {
     //
     // @notes:
     router.back();
@@ -38,13 +37,13 @@ export const ShakaFundraiseOrigin: React.FC<TypesShakaFundraiseOrigin> = ({
       </Head>
 
       <div
-        className={`flex flex-col w-full bg-accent min-h-screen overflow-hidden`}
+        className={`flex flex-col w-full bg-secondary min-h-screen overflow-hidden`}
       >
         <ShakaNavigation
           basis={{
             ...basis,
-            bg: `bg-accent`,
-            click: lcShakaFundraiseOriginToHome,
+            bg: `bg-secondary`,
+            click: lcShakaContactOriginToHome,
           }}
         />
 
@@ -62,24 +61,17 @@ export const ShakaFundraiseOrigin: React.FC<TypesShakaFundraiseOrigin> = ({
                 <path
                   fillRule={"evenodd"}
                   d={
-                    "M14.615 1.595a.75.75 0 01.359.852L12.982 9.75h7.268a.75.75 0 01.548 1.262l-10.5 11.25a.75.75 0 01-1.272-.71l1.992-7.302H3.75a.75.75 0 01-.548-1.262l10.5-11.25a.75.75 0 01.913-.143z"
+                    "M5.337 21.718a6.707 6.707 0 01-.533-.074.75.75 0 01-.44-1.223 3.73 3.73 0 00.814-1.686c.023-.115-.022-.317-.254-.543C3.274 16.587 2.25 14.41 2.25 12c0-5.03 4.428-9 9.75-9s9.75 3.97 9.75 9c0 5.03-4.428 9-9.75 9-.833 0-1.643-.097-2.417-.279a6.721 6.721 0 01-4.246.997z"
                   }
                   clipRule={"evenodd"}
                 />
               </svg>
             </div>
-            <div className={`flex flex-col md:flex-row md:space-x-4`}>
-              <p
-                className={`font-apercu font-medium text-3xl text-white font-bold `}
-              >
-                {`${t(`glossary:lightning`, `lightning`)}`}
-              </p>
-              <p
-                className={`font-apercu font-medium text-3xl text-white font-bold `}
-              >
-                {`${t(`glossary:donation`, `donation`)}`}
-              </p>
-            </div>
+            <p
+              className={`font-apercu font-medium text-3xl text-white font-bold `}
+            >
+              {`${t(`glossary:get_in_touch`, `get_in_touch`)}`}
+            </p>
             <div className={`flex text-white`}>
               <svg
                 xmlns={"http://www.w3.org/2000/svg"}
@@ -90,7 +82,7 @@ export const ShakaFundraiseOrigin: React.FC<TypesShakaFundraiseOrigin> = ({
                 <path
                   fillRule={"evenodd"}
                   d={
-                    "M14.615 1.595a.75.75 0 01.359.852L12.982 9.75h7.268a.75.75 0 01.548 1.262l-10.5 11.25a.75.75 0 01-1.272-.71l1.992-7.302H3.75a.75.75 0 01-.548-1.262l10.5-11.25a.75.75 0 01.913-.143z"
+                    "M5.337 21.718a6.707 6.707 0 01-.533-.074.75.75 0 01-.44-1.223 3.73 3.73 0 00.814-1.686c.023-.115-.022-.317-.254-.543C3.274 16.587 2.25 14.41 2.25 12c0-5.03 4.428-9 9.75-9s9.75 3.97 9.75 9c0 5.03-4.428 9-9.75 9-.833 0-1.643-.097-2.417-.279a6.721 6.721 0 01-4.246.997z"
                   }
                   clipRule={"evenodd"}
                 />
@@ -98,11 +90,11 @@ export const ShakaFundraiseOrigin: React.FC<TypesShakaFundraiseOrigin> = ({
             </div>
           </div>
           <div className={`flex flex-col w-full pt-8 px-8 items-center  `}>
-            <ShakaFundraiseForm basis={{ ...basis }} />
+            <ShakaContactForm basis={{ ...basis }} />
           </div>
         </div>
       </div>
-      <ShakaFooter basis={{ ...basis, bg: `bg-accent` }} />
+      <ShakaFooter basis={{ ...basis, bg: `bg-secondary` }} />
     </>
   );
 };

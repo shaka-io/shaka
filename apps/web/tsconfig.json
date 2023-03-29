@@ -27,6 +27,7 @@
     "allowJs": true,
     "paths": {
       "@shaka-web-env/*": ["_env/*"],
+      "@shaka-web-class/*": ["class/*"],
       "@shaka-web-components/*": ["components/*"],
       "@shaka-web-configuration/*": ["configuration/*"],
       "@shaka-web-features/*": ["features/*"],

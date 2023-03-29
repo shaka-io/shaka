@@ -1,5 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { classshaka } from "@shaka-web-class/index";
 import { TypesShakaShape } from "@shaka-web-shapes/store";
+import { TypesLibraryBundles } from "@wavesrcool/library/lib/bundles/_types";
+
+const { bundles } = classshaka;
+
+export type TypesContactShapeBundles = {
+  InvoiceAmount: TypesLibraryBundles;
+};
 
 export type TypesFundraiseShapeMoneyKind = "btc" | "fiat";
 
@@ -16,6 +24,8 @@ export type TypesFundraiseShapeValue = {
   moneykind: TypesFundraiseShapeMoneyKind;
 
   lninvoice: string;
+
+  bundles: TypesContactShapeBundles;
 };
 
 export type TypesFundraiseShape = {
@@ -31,8 +41,12 @@ const initialState: TypesFundraiseShape = {
     // shape initial FundraiseShape
     //
 
-    moneykind: `fiat`,
+    moneykind: `btc`,
     lninvoice: ``,
+
+    bundles: {
+      InvoiceAmount: bundles.reference,
+    },
   },
 };
 
@@ -100,6 +114,26 @@ export const FundraiseShapeSlice = createSlice({
         lninvoice: payload,
       };
     },
+
+    writeFundraiseShapeBundlesInvoiceAmount: (
+      state,
+      action: PayloadAction<{ letters: string; pass: boolean }>
+    ) => {
+      const { letters, pass } = action.payload;
+      const InvoiceAmount = bundles.cyclic.letters({
+        bundle: state.value.bundles.InvoiceAmount,
+        letters,
+        pass,
+      });
+
+      state.value = {
+        ...state.value,
+        bundles: {
+          ...state.value.bundles,
+          InvoiceAmount,
+        },
+      };
+    },
   },
 });
 
@@ -114,6 +148,8 @@ export const {
   //
   writeFundraiseShapeMoneyKind,
   writeFundraiseShapeLnInvoice,
+
+  writeFundraiseShapeBundlesInvoiceAmount,
 } = FundraiseShapeSlice.actions;
 
 export const ofFundraiseShape = (

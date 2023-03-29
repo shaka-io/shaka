@@ -52,15 +52,20 @@ export const ShakaOrigin: React.FC<TypesShakaOrigin> = ({
 
         <div className={`flex flex-col w-full pt-24 space-y-16`}>
           <div className={`group flex flex-row px-8`}>
-            <div className={`flex flex-row items-center space-x-4`}>
-              <Link href={`/fundraise`}>
-                <p
-                  className={`font-apercu font-medium text-3xl text-white group-hover:text-opacity-70 `}
-                >
-                  {`${t(`glossary:join_our_crowdfund`, `join_our_crowdfund`)}`}
-                </p>
-              </Link>
-              <div className={`flex text-white`}>
+            <div className={`flex flex-row w-full items-center space-x-4`}>
+              <div className={`flex flex-row max-lg:basis-6/7`}>
+                <Link href={`/fundraise`}>
+                  <p
+                    className={`font-apercu font-medium text-3xl text-white group-hover:text-opacity-70 `}
+                  >
+                    {`${t(
+                      `glossary:join_our_crowdfund`,
+                      `join_our_crowdfund`
+                    )}`}
+                  </p>
+                </Link>
+              </div>
+              <div className={`flex flex-row max-lg:basis-1/7 text-white`}>
                 <svg
                   xmlns={"http://www.w3.org/2000/svg"}
                   viewBox={"0 0 24 24"}
@@ -80,15 +85,17 @@ export const ShakaOrigin: React.FC<TypesShakaOrigin> = ({
           </div>
 
           <div className={`group flex flex-row px-8 `}>
-            <div className={`flex flex-row items-center space-x-4 `}>
-              <Link href={`/contact`}>
-                <p
-                  className={`font-apercu font-medium text-3xl text-white group-hover:text-opacity-70`}
-                >
-                  {`${t(`glossary:`, `Get in touch`)}`}
-                </p>
-              </Link>
-              <div className={`flex text-white`}>
+            <div className={`flex flex-row w-full items-center space-x-4 `}>
+              <div className={`flex flex-row max-lg:basis-6/7`}>
+                <Link href={`/contact`}>
+                  <p
+                    className={`font-apercu font-medium text-3xl text-white group-hover:text-opacity-70`}
+                  >
+                    {`${t(`glossary:get_in_touch`, `get_in_touch`)}`}
+                  </p>
+                </Link>
+              </div>
+              <div className={`flex flex-row max-lg:basis-1/7 text-white`}>
                 <svg
                   xmlns={"http://www.w3.org/2000/svg"}
                   viewBox={"0 0 24 24"}

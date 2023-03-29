@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
+import ContactShape from "@shaka-web-shapes/contact/ContactShape";
 import FundraiseShape from "@shaka-web-shapes/fundraise/FundraiseShape";
 import RootShape from "@shaka-web-shapes/root/RootShape";
 import DrawerShape from "./drawer/DrawerShape";
@@ -11,6 +12,7 @@ export function makeStore() {
       RootShape,
       DrawerShape,
       FundraiseShape,
+      ContactShape,
     },
   });
 }

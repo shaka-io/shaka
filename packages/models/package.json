@@ -29,7 +29,8 @@
     "node"
   ],
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
     "ci-env": "shaka-collect-env-example models",

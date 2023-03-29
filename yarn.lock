@@ -3397,10 +3397,10 @@
     prettier "^2.7.1"
     yargs "^17.5.1"
 
-"@wavesrcool/library@^0.1.8":
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/@wavesrcool/library/-/library-0.1.8.tgz#9004f7610290a802fe70a83da4a5ef8a09d670f9"
-  integrity sha512-Z2sqSYKC8hW8bCgbsS7JPitB9wAmsvHxZ2ZF5JerG7EsC01hV9V0nRB1P1oDcgTxINxik/vH4FJzZhK5vS5/0g==
+"@wavesrcool/library@^0.1.9":
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/@wavesrcool/library/-/library-0.1.9.tgz#9116e2be825273b9c91892301ec2603e985dd9b6"
+  integrity sha512-ZR+x+Sr5DiL6RefKJh1F2b5pMEWdTzcfrL8xtcvv0WTHo4weCs/aQl8l77MK0xOXWXJf/ALZsAPLky5jF9Y6WQ==
   dependencies:
     "@wavesrcool/dev" "^0.1.7"
 
