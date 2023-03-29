@@ -14,7 +14,7 @@
     "type": "git",
     "url": "ssh://github.com/shaka-io/shaka.git"
   },
-  "version": "1.2.0",
+  "version": "1.2.1",
   "workspaces": {
     "nohoist": [
       "**"
@@ -38,7 +38,7 @@
     "@apollo/link-error": "^2.0.0-beta.3",
     "@bitcoin-design/bitcoin-icons-react": "^0.1.9",
     "@reduxjs/toolkit": "^1.9.0",
-    "@shaka-js/library": "^0.2.0",
+    "@shaka-js/library": "^0.2.1",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/line-clamp": "^0.4.2",
@@ -78,7 +78,7 @@
     "@graphql-codegen/typescript": "^2.8.1",
     "@graphql-codegen/typescript-operations": "^2.5.6",
     "@graphql-codegen/typescript-react-apollo": "^3.3.6",
-    "@shaka-js/dev": "^0.2.0",
+    "@shaka-js/dev": "^0.2.1",
     "@types/apollo-upload-client": "^17.0.2",
     "@types/lodash": "^4.14.192",
     "@types/node": "18.11.9",

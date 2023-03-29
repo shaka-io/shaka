@@ -15,7 +15,7 @@
     "url": "ssh://github.com/shaka-io/shaka.git"
   },
   "type": "commonjs",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "bin": {
     "shaka-files-rename": "lib/bins/files-rename/main.js",
     "shaka-collect-env-example": "lib/bins/collect-env-example/main.js"
