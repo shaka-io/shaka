@@ -1,1 +1,2 @@
+// shaka
 declare module "jshashes";

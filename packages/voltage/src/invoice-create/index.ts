@@ -23,6 +23,7 @@ export const VoltageInvoiceCreate = async ({
 
     return undefined;
   } catch (e) {
+    console.log(e, `error`); // @todo rm debugging
     return undefined;
   }
 };
