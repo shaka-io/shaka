@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { EmailRecords } from "./EmailRecords";
 
 @ObjectType()
 @Entity()
@@ -35,13 +36,17 @@ export class Email extends BaseEntity {
   //
 
   @Field(() => String)
-  @Column({ type: `varchar`, unique: true })
+  @Column({ type: `varchar` })
   address!: string;
 
   //
   //
   // model records
   //
+
+  @Field(() => EmailRecords, { nullable: true })
+  @Column({ type: "json", nullable: true, default: null })
+  records!: EmailRecords | null;
 
   //
   //

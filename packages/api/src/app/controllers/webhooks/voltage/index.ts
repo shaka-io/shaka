@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-export const voltagewebhooks = (req: Request, res: Response): void => {
+export const webhooksvoltage = (req: Request, res: Response): void => {
   const { body } = req;
 
   console.log(req, `req`); // debug

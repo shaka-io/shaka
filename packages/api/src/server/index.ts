@@ -10,7 +10,8 @@ import http, { Server } from "http";
 import Redis from "ioredis";
 import { buildSchema } from "type-graphql";
 import "websocket-polyfill";
-import { app } from "../app";
+import { appmethod } from "../app";
+import { routermethod } from "../app/router";
 import { ClassesApi } from "../classes";
 import { ShakaGraphLnInfo } from "../resolvers/ln/info/shaka-graph-ln-info-resolver";
 import { ShakaGraphLnInvoiceCreate } from "../resolvers/ln/invoice-create/shaka-graph-ln-invoice-create-resolver";
@@ -29,6 +30,8 @@ export const server = async (
       .initialize()
       .then(() => console.log(`[shaka-api] (models) Connection established.`));
 
+    const router = routermethod(models);
+    const app = appmethod(router);
     const httpServer = http.createServer(app);
 
     const schema = await buildSchema({

@@ -1,10 +1,10 @@
+import { LibraryRegExpEmail } from "@shaka-js/library/lib/regexp/email";
 import {
   ofContactShape,
   writeContactShapeBundlesContactEmail,
 } from "@shaka-web-shapes/contact/ContactShape";
 import { useFold, useShape } from "@shaka-web-shapes/hooks";
 import { TypesShakaBasis } from "@shaka-web-types/basis/TypesShakaBasis";
-import { LibraryRegExpEmail } from "@shaka-js/library/lib/regexp/email";
 import { useTranslation } from "next-i18next";
 import * as React from "react";
 

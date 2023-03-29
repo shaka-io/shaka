@@ -1,8 +1,10 @@
 import { env } from "@shaka-js/env";
 import { DataSource, DataSourceOptions } from "typeorm";
 import { SeederOptions } from "typeorm-extension";
+import { Email } from "../email/Email";
 import { Question } from "../question/Question";
 import { envmodels } from "../_env";
+import { Shaka1680109864603 } from "./migrations/1680109864603-Shaka";
 
 const { PROD, ENV } = env;
 const { MODELS_DB } = envmodels;
@@ -15,11 +17,11 @@ const options: DataSourceOptions & SeederOptions = {
   synchronize: false,
   logging: !PROD,
   dropSchema: false,
-  entities: [Question],
+  entities: [Email, Question],
   subscribers: [],
   migrationsTableName: "history",
   migrationsRun: true,
-  migrations: [],
+  migrations: [Shaka1680109864603],
   seeds: [],
 };
 

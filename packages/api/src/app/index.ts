@@ -1,19 +1,19 @@
 import cors, { CorsOptions } from "cors";
-import express, { Application } from "express";
+import express, { Application, Router } from "express";
 import { envapi } from "../_env";
-import { router } from "./router";
 
 const { API_CORS_ORIGIN } = envapi;
 
-const app: Application = express();
+export const appmethod = (router: Router): Application => {
+  const app: Application = express();
 
-const corsOptions: CorsOptions = {
-  origin: API_CORS_ORIGIN,
-  credentials: true,
+  const corsOptions: CorsOptions = {
+    origin: API_CORS_ORIGIN,
+    credentials: true,
+  };
+  app.use(cors(corsOptions));
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+  app.use(router);
+  return app;
 };
-app.use(cors(corsOptions));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(router);
-
-export { app };

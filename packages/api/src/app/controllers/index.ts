@@ -1,11 +1,15 @@
 import { all } from "./all";
 import { health } from "./health";
 import { TypesControllers } from "./types";
-import { voltagewebhooks } from "./voltage/webhooks";
+import { webhooksmailgun } from "./webhooks/mailgun";
+import { webhooksvoltage } from "./webhooks/voltage";
 
 export const controllers: TypesControllers = {
   all,
   index: all,
   health,
-  voltagewebhooks,
+  webhooks: {
+    mailgun: webhooksmailgun,
+    voltage: webhooksvoltage,
+  },
 };
