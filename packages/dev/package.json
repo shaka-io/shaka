@@ -3,7 +3,7 @@
   "bugs": "https://github.com/shaka-io/shaka/issues",
   "homepage": "https://github.com/shaka-io/shaka/tree/main/packages/dev#readme",
   "contributors": [],
-  "description": "",
+  "description": "A collection of build tools used across Shaka packages",
   "engines": {
     "node": ">=14.0.0"
   },

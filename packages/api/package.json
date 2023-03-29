@@ -3,7 +3,7 @@
   "bugs": "https://github.com/shaka-io/shaka/issues",
   "homepage": "https://github.com/shaka-io/shaka/tree/main/packages/api#readme",
   "contributors": [],
-  "description": "",
+  "description": "An HTTP server with a GraphQL endpoint for use as the Shaka website API",
   "engines": {
     "node": ">=14.0.0"
   },

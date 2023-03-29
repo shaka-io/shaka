@@ -3,7 +3,7 @@
   "bugs": "https://github.com/shaka-io/shaka/issues",
   "homepage": "https://github.com/shaka-io/shaka/tree/main/packages/env#readme",
   "contributors": [],
-  "description": "",
+  "description": "A typed Node.js process environment instance shared across Shaka packages",
   "engines": {
     "node": ">=14.0.0"
   },
