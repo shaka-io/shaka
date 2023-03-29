@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { TypesMediaConfiguration } from "./types";
 
-const rootdir = path.join(__dirname, `..`, `..`);
+const rootdir = path.join(process.cwd());
 const RESOURCE_DIRECTORY = path.join(rootdir, `resources`);
 console.log(RESOURCE_DIRECTORY, `RESOURCE_DIRECTORY`);
 
