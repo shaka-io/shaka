@@ -27,7 +27,7 @@ yarn-error.log*
 coverage/
 web-build/
 .vscode/
-.npmrc
+# .npmrc
 *.macaroon
 
 # shaka
