@@ -7,7 +7,4 @@ export type EnvApiType = {
   API_TOK_IV: string;
   API_HASH_IV: string;
   API_ENC_IV: string;
-  API_MAIL_BASE: string;
-  API_MAIL_KEY: string;
-  API_MAIL_SIGN: string;
 };

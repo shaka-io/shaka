@@ -1,21 +1,21 @@
 {
   "author": "devops@shaka.website",
   "bugs": "https://github.com/shaka-io/shaka/issues",
-  "homepage": "https://github.com/shaka-io/shaka/tree/main/packages/env#readme",
+  "homepage": "https://github.com/shaka-io/shaka/tree/main/packages/mail#readme",
   "contributors": [],
-  "description": "A typed Node.js process environment instance shared across Shaka packages",
+  "description": "A collections of Mail methods for Lightning Network",
   "engines": {
     "node": ">=14.0.0"
   },
   "license": "AGPL-3.0",
-  "name": "@shaka-js/env",
+  "name": "@shaka-js/mail",
   "repository": {
-    "directory": "packages/env",
+    "directory": "packages/mail",
     "type": "git",
     "url": "ssh://github.com/shaka-io/shaka.git"
   },
   "type": "commonjs",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
@@ -23,7 +23,7 @@
   ],
   "keywords": [
     "shaka",
-    "env",
+    "mail",
     "es6",
     "node"
   ],
@@ -44,5 +44,13 @@
     "test": "yarn jest",
     "update": "rm -rf node_modules && yarn"
   },
-  "gitHead": "801ac3b8ffa89bc40a6ee1e8f7af9d37bd8094a6"
+  "devDependencies": {
+    "@shaka-js/dev": "^0.1.1"
+  },
+  "dependencies": {
+    "@shaka-js/env": "^0.1.1",
+    "axios": "^1.2.2",
+    "form-data": "^4.0.0",
+    "mailgun.js": "^8.0.6"
+  }
 }

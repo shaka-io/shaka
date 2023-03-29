@@ -23,6 +23,8 @@
       "@shaka-js/env/*": ["env/src/*"],
       "@shaka-js/library": ["library/src"],
       "@shaka-js/library/*": ["library/src/*"],
+      "@shaka-js/mail": ["mail/src"],
+      "@shaka-js/mail/*": ["mail/src/*"],
       "@shaka-js/models": ["models/src"],
       "@shaka-js/models/*": ["models/src/*"],
       "@shaka-js/voltage": ["voltage/src"],

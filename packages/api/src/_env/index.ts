@@ -58,24 +58,6 @@ if (!API_REDIS_PORT) {
   throw new Error(msg);
 }
 
-const { API_MAIL_BASE } = process.env;
-if (!API_MAIL_BASE) {
-  msg = `process.env.API_MAIL_BASE`;
-  throw new Error(msg);
-}
-
-const { API_MAIL_KEY } = process.env;
-if (!API_MAIL_KEY) {
-  msg = `process.env.API_MAIL_KEY`;
-  throw new Error(msg);
-}
-
-const { API_MAIL_SIGN } = process.env;
-if (!API_MAIL_SIGN) {
-  msg = `process.env.API_MAIL_SIGN`;
-  throw new Error(msg);
-}
-
 export const envapi: EnvApiType = {
   API_PORT,
   API_CORS_ORIGIN,
@@ -85,7 +67,4 @@ export const envapi: EnvApiType = {
   API_ENC_IV,
   API_COOKIE_NAME,
   API_COOKIE_IV,
-  API_MAIL_BASE,
-  API_MAIL_KEY,
-  API_MAIL_SIGN,
 };

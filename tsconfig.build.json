@@ -12,6 +12,8 @@
     { "path": "./packages/env/tsconfig.spec.json" },
     { "path": "./packages/library/tsconfig.build.json" },
     { "path": "./packages/library/tsconfig.spec.json" },
+    { "path": "./packages/mail/tsconfig.build.json" },
+    { "path": "./packages/mail/tsconfig.spec.json" },
     { "path": "./packages/models/tsconfig.build.json" },
     { "path": "./packages/models/tsconfig.spec.json" },
     { "path": "./packages/voltage/tsconfig.build.json" },
