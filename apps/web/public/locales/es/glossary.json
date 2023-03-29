@@ -1,3 +1,17 @@
 {
-  "join_our_crowdfund": "Únete a nuestro crowdfund"
+  "fiat": "Fiat",
+  "please_use_a_valid_email": "Por favor, utiliza un correo electrónico válido",
+  "please_write_3_words_minimum": "Por favor, escriba 3 palabras como mínimo",
+  "name": "Nombre",
+  "email": "Email",
+  "submit": "Enviar",
+  "join_our_crowdfund": "Únete a nuestro crowdfunding",
+  "made_with_love_in": "Hecho con amor en",
+  "page_not_found": "Página no encontrada",
+  "all_rights_reserved": "Todos los derechos reservados",
+  "copyright": "Copyright",
+  "generate": "Generar",
+  "get_in_touch": "Ponte en contacto",
+  "lightning": "Lightning",
+  "donation": "Donación"
 }

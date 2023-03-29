@@ -50,5 +50,6 @@
   "dependencies": {
     "@shaka/env": "^0.0.1",
     "axios": "^1.2.2"
-  }
+  },
+  "gitHead": "47d5ca4824861161bbf94f4dcb8e2932a37e00a5"
 }

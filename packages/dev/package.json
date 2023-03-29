@@ -57,5 +57,6 @@
     "jsonfile": "^6.1.0",
     "lodash": "^4.17.21",
     "yargs": "^17.5.1"
-  }
+  },
+  "gitHead": "47d5ca4824861161bbf94f4dcb8e2932a37e00a5"
 }
