@@ -8,6 +8,7 @@ const argenv = getArgv().toLowerCase();
 
 const main = () => {
   let msg = `[ci-env-example]`;
+
   if (![`models`, `api`].includes(argenv)) {
     msg += ` - specified unknown environment`;
     throw new Error(msg);
