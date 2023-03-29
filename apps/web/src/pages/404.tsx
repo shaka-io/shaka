@@ -63,7 +63,7 @@ export const getStaticProps: GetStaticProps = async ({
 }: GetStaticPropsContext) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale, [...BASIS], CONFIG)),
+      ...(await serverSideTranslations(locale, dictionary, CONFIG)),
     },
   };
 };
