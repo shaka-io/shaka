@@ -15,7 +15,7 @@
     "url": "ssh://github.com/shaka-io/shaka.git"
   },
   "type": "commonjs",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
@@ -54,11 +54,11 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
-    "@shaka-js/dev": "^0.0.4",
+    "@shaka-js/dev": "^0.0.5",
     "@types/dotenv-safe": "^8.1.2"
   },
   "dependencies": {
-    "@shaka-js/env": "^0.0.4",
+    "@shaka-js/env": "^0.0.5",
     "class-validator": "0.13.2",
     "dotenv-safe": "^8.2.0",
     "reflect-metadata": "0.1.13",
