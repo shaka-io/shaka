@@ -15,7 +15,7 @@
     "url": "ssh://github.com/shaka-io/shaka.git"
   },
   "type": "commonjs",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
@@ -57,8 +57,8 @@
     "@types/dotenv-safe": "^8.1.2"
   },
   "dependencies": {
-    "@shaka-js/dev": "^0.1.1",
-    "@shaka-js/env": "^0.1.1",
+    "@shaka-js/dev": "^0.1.2",
+    "@shaka-js/env": "^0.1.2",
     "class-validator": "0.13.2",
     "dotenv-safe": "^8.2.0",
     "reflect-metadata": "0.1.13",
