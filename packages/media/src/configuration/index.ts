@@ -2,10 +2,11 @@ import fs from "fs";
 import path from "path";
 import { TypesMediaConfiguration } from "./types";
 
-const rootdir = path.join(__dirname, `..`, `..`);
-const RESOURCE_DIRECTORY = path.join(rootdir, `resources`);
+const rootdir = path.join(__dirname, `..`, `..`, `src`);
+const RESOURCE_DIRECTORY = path.join(rootdir, `_resources`);
+
 if (!fs.existsSync(RESOURCE_DIRECTORY)) {
-  fs.mkdirSync(RESOURCE_DIRECTORY, { recursive: true });
+  throw new Error(`[shaka-media] Error. No resources directory.`);
 }
 
 export const configuration: TypesMediaConfiguration = {
