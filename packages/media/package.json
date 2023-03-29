@@ -1,0 +1,63 @@
+{
+  "author": "devops@shaka.website",
+  "bugs": "https://github.com/shaka-io/shaka/issues",
+  "homepage": "https://github.com/shaka-io/shaka/tree/main/packages/media#readme",
+  "contributors": [],
+  "description": "An HTTP file server for hosting Shaka media content",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "license": "AGPL-3.0",
+  "name": "@shaka-js/media",
+  "repository": {
+    "directory": "packages/media",
+    "type": "git",
+    "url": "ssh://github.com/shaka-io/shaka.git"
+  },
+  "type": "commonjs",
+  "version": "0.1.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "./lib"
+  ],
+  "keywords": [
+    "shaka",
+    "media",
+    "es6",
+    "node"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "ci-env": "shaka-collect-env-example media",
+    "ci": "yarn ci-env && yarn lint",
+    "w": "tsc -w",
+    "0l": "rm -rf lib",
+    "0t": "rm -f tsconfig*tsbuildinfo",
+    "c": "yarn 0l && yarn 0t && tsc --project tsconfig.build.json",
+    "lint": "eslint './src/**/*.{ts,tsx}' --max-warnings=1 --fix",
+    "build": "yarn ci && yarn c",
+    "build-dev": "yarn lint && yarn c",
+    "prepack": "yarn build",
+    "test": "yarn jest",
+    "update": "rm -rf node_modules && yarn",
+    "dev": "node lib/run.js"
+  },
+  "gitHead": "801ac3b8ffa89bc40a6ee1e8f7af9d37bd8094a6",
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/dotenv-safe": "^8.1.2",
+    "@types/express": "^4.17.17"
+  },
+  "dependencies": {
+    "@shaka-js/env": "^0.1.1",
+    "@shaka-js/models": "^0.1.1",
+    "cors": "^2.8.5",
+    "dotenv-safe": "^8.2.0",
+    "express": "^4.18.2",
+    "helmet": "^6.0.1"
+  }
+}
