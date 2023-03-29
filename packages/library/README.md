@@ -1,1 +1,1 @@
-# @shaka/library
+# @shaka-js/library

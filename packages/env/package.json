@@ -1,5 +1,5 @@
 {
-  "author": "devops@shaka.website",
+  "author": "devops@shaka-js.website",
   "bugs": "https://github.com/shaka-io/shaka/issues",
   "homepage": "https://github.com/shaka-io/shaka/tree/main/packages/env#readme",
   "contributors": [],
@@ -8,7 +8,7 @@
     "node": ">=14.0.0"
   },
   "license": "AGPL-3.0",
-  "name": "@shaka/env",
+  "name": "@shaka-js/env",
   "repository": {
     "directory": "packages/env",
     "type": "git",
@@ -44,5 +44,5 @@
     "test": "yarn jest",
     "update": "rm -rf node_modules && yarn"
   },
-  "gitHead": "47d5ca4824861161bbf94f4dcb8e2932a37e00a5"
+  "gitHead": "5855960fc86ddfcadc8db0f4daaaf4c08e3f8512"
 }

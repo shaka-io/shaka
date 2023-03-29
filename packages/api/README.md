@@ -1,1 +1,1 @@
-# @shaka/api
+# @shaka-js/api

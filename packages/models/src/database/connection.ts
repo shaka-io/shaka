@@ -1,4 +1,4 @@
-import { env } from "@shaka/env";
+import { env } from "@shaka-js/env";
 import { DataSource, DataSourceOptions } from "typeorm";
 import { SeederOptions } from "typeorm-extension";
 import { Question } from "../question/Question";

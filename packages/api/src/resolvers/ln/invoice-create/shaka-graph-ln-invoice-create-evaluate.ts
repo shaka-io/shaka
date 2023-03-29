@@ -1,4 +1,4 @@
-import { VoltageInvoiceCreate } from "@shaka/voltage/lib/invoice-create/";
+import { VoltageInvoiceCreate } from "@shaka-js/voltage/lib/invoice-create/";
 import { TypesServerContext } from "../../../server/types";
 import { ShakaGraphDataLnInvoiceCreate } from "./shaka-graph-ln-invoice-create-data";
 import { ShakaGraphFiguresLnInvoiceCreate } from "./shaka-graph-ln-invoice-create-figure";

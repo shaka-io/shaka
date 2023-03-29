@@ -1,5 +1,5 @@
 {
-  "author": "devops@shaka.website",
+  "author": "devops@shaka-js.website",
   "bugs": "https://github.com/shaka-io/shaka/issues",
   "homepage": "https://github.com/shaka-io/shaka/tree/main/packages/api#readme",
   "contributors": [],
@@ -8,7 +8,7 @@
     "node": ">=14.0.0"
   },
   "license": "AGPL-3.0",
-  "name": "@shaka/api",
+  "name": "@shaka-js/api",
   "repository": {
     "directory": "packages/api",
     "type": "git",
@@ -50,7 +50,7 @@
     "dev": "node lib/run.js"
   },
   "devDependencies": {
-    "@shaka/dev": "^0.0.2",
+    "@shaka-js/dev": "^0.0.2",
     "@types/body-parser": "^1.19.2",
     "@types/connect-redis": "^0.0.20",
     "@types/cors": "^2.8.13",
@@ -60,10 +60,10 @@
   },
   "dependencies": {
     "@apollo/server": "^4.4.0",
-    "@shaka/env": "^0.0.2",
-    "@shaka/library": "^0.0.2",
-    "@shaka/models": "^0.0.2",
-    "@shaka/voltage": "^0.0.2",
+    "@shaka-js/env": "^0.0.2",
+    "@shaka-js/library": "^0.0.2",
+    "@shaka-js/models": "^0.0.2",
+    "@shaka-js/voltage": "^0.0.2",
     "body-parser": "^1.20.2",
     "class-validator": "^0.14.0",
     "connect-redis": "^6.1.3",
@@ -78,5 +78,5 @@
     "type-graphql": "2.0.0-beta.1",
     "websocket-polyfill": "^0.0.3"
   },
-  "gitHead": "47d5ca4824861161bbf94f4dcb8e2932a37e00a5"
+  "gitHead": "5855960fc86ddfcadc8db0f4daaaf4c08e3f8512"
 }

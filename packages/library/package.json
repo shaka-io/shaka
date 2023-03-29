@@ -1,5 +1,5 @@
 {
-  "author": "devops@shaka.website",
+  "author": "devops@shaka-js.website",
   "bugs": "https://github.com/shaka-io/shaka/issues",
   "homepage": "https://github.com/shaka-io/shaka/tree/main/packages/library#readme",
   "contributors": [],
@@ -8,7 +8,7 @@
     "node": ">=14.0.0"
   },
   "license": "AGPL-3.0",
-  "name": "@shaka/library",
+  "name": "@shaka-js/library",
   "repository": {
     "directory": "packages/library",
     "type": "git",
@@ -45,8 +45,8 @@
     "update": "rm -rf node_modules && yarn"
   },
   "dependencies": {
-    "@shaka/dev": "^0.0.2",
-    "@shaka/env": "^0.0.2",
+    "@shaka-js/dev": "^0.0.2",
+    "@shaka-js/env": "^0.0.2",
     "axios": "^1.2.2",
     "jshashes": "^1.0.8",
     "uuid": "^9.0.0"
@@ -54,5 +54,5 @@
   "devDependencies": {
     "@types/uuid": "^9.0.1"
   },
-  "gitHead": "47d5ca4824861161bbf94f4dcb8e2932a37e00a5"
+  "gitHead": "5855960fc86ddfcadc8db0f4daaaf4c08e3f8512"
 }

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { LibraryHashHmac } from "@shaka/library/lib/hash/hmac/LibraryHashHmac";
-import { LibraryUniques } from "@shaka/library/lib/uniques/LibraryUniques";
+import { LibraryHashHmac } from "@shaka-js/library/lib/hash/hmac/LibraryHashHmac";
+import { LibraryUniques } from "@shaka-js/library/lib/uniques/LibraryUniques";
 import { GraphObjectsResolve } from "../../objects/resolve/GraphObjectsResolve";
 
 export class ClassesApiHandler {

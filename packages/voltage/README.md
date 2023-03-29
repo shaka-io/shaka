@@ -1,1 +1,1 @@
-# @shaka/voltage
+# @shaka-js/voltage

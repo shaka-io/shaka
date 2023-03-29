@@ -1,1 +1,1 @@
-# @shaka/models
+# @shaka-js/models

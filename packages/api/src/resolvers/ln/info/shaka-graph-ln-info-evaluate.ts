@@ -1,4 +1,4 @@
-import { VoltageGetInfo } from "@shaka/voltage/lib/get-info/";
+import { VoltageGetInfo } from "@shaka-js/voltage/lib/get-info/";
 import { TypesServerContext } from "../../../server/types";
 import { ShakaGraphDataLnInfo } from "./shaka-graph-ln-info-data";
 import { ShakaGraphFiguresLnInfo } from "./shaka-graph-ln-info-figure";
