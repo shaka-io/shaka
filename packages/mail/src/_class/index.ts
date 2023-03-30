@@ -1,3 +1,4 @@
+import { LibraryRegExpEmail } from "@shaka-js/library/lib/regexp/email";
 import formData from "form-data";
 import Mailgun from "mailgun.js";
 import Client from "mailgun.js/client";
@@ -38,11 +39,15 @@ export class MailClass {
     ResolveMailClassSendMessage | undefined
   > {
     try {
+      if (!LibraryRegExpEmail.test(to)) {
+        return `email-re`;
+      }
+
       const replypref = frompref;
 
       const message: MailgunMessageData = {
         to,
-        from: `${frompref}@${MAIL_BASE}`,
+        from: `Shaka <${frompref}@${MAIL_BASE}>`,
         text,
         html: ``,
         subject,
@@ -53,6 +58,7 @@ export class MailClass {
       console.log(JSON.stringify(sendmail, null, 4), `sendmail`); // @todo dev rm
       return undefined;
     } catch (e) {
+      console.log(e, `(dev) - catch`);
       return `catch`;
     }
   }

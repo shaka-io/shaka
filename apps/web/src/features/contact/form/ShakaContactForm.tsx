@@ -1,18 +1,24 @@
 import { ShakaContactFormContent } from "@shaka-web-features/contact/form/content/ShakaContactFormContent";
 import { ShakaContactFormEmail } from "@shaka-web-features/contact/form/email/ShakaContactFormEmail";
 import { ShakaContactFormName } from "@shaka-web-features/contact/form/name/ShakaContactFormName";
+import { useLocale } from "@shaka-web-hooks/use-locale";
+import { useShakaGraph0001Mutation } from "@shaka-web-library/graph/hooks";
 import {
+  initContactShape,
   ofContactShape,
   TypesContactShapeThread,
   writeContactShapeEntracteFalse,
   writeContactShapeEntracteTrue,
   writeContactShapeInverseFalse,
   writeContactShapeInverseTrue,
+  writeContactShapeSubmitted,
+  writeContactShapeSubmittedTime,
 } from "@shaka-web-shapes/contact/ContactShape";
 import { useFold, useShape } from "@shaka-web-shapes/hooks";
 import { TypesShakaBasis } from "@shaka-web-types/basis/TypesShakaBasis";
 import { useTranslation } from "next-i18next";
 import * as React from "react";
+import { useElapsedTime } from "use-elapsed-time";
 
 export type TypesShakaContactForm = {
   basis: TypesShakaBasis;
@@ -27,11 +33,32 @@ export const ShakaContactForm: React.FC<TypesShakaContactForm> = ({
 
   const ContactShape = useShape(ofContactShape);
 
+  const locale = useLocale();
+  const [shaka0001] = useShakaGraph0001Mutation();
+
+  const { reset: timereset } = useElapsedTime({
+    isPlaying: ContactShape.submitted,
+    duration: 3,
+    onComplete: () => {
+      fold(initContactShape());
+      fold(writeContactShapeSubmittedTime());
+    },
+  });
+
   const lcaShakaContactFormSubmit = React.useCallback(async () => {
     //
     // @notes:
 
+    timereset(0);
+
     let th: TypesContactShapeThread;
+
+    const holdminutes = (Date.now() - ContactShape.submittedTime) / 1000;
+    if (holdminutes < 60 * 3) {
+      th = `glossary:please_allow_a_few_minutes_to_submit_another_question`;
+      fold(writeContactShapeInverseTrue(th));
+      return;
+    }
 
     if (!ContactShape.bundles.ContactEmail.pass) {
       th = `glossary:please_use_a_valid_email`;
@@ -61,10 +88,21 @@ export const ShakaContactForm: React.FC<TypesShakaContactForm> = ({
         //
         // start
 
-        console.log(`run`);
-        // eslint-disable-next-line no-promise-executor-return
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        console.log(`complete`);
+        const { data: shaka0001d } = await shaka0001({
+          variables: {
+            figure: {
+              locale,
+              title: ContactShape.bundles.ContactName.letters,
+              contact: ContactShape.bundles.ContactEmail.letters,
+              content: ContactShape.bundles.ContactContent.letters,
+            },
+          },
+        });
+
+        if (shaka0001d?.ShakaGraph0001.pass) {
+          fold(writeContactShapeSubmitted(true));
+          return;
+        }
 
         //
         // end
@@ -85,15 +123,22 @@ export const ShakaContactForm: React.FC<TypesShakaContactForm> = ({
     // end
     return;
   }, [
+    ContactShape.bundles.ContactContent.letters,
     ContactShape.bundles.ContactContent.pass,
+    ContactShape.bundles.ContactEmail.letters,
     ContactShape.bundles.ContactEmail.pass,
+    ContactShape.bundles.ContactName.letters,
+    ContactShape.submittedTime,
     fold,
+    locale,
+    shaka0001,
+    timereset,
   ]);
 
   return (
     <>
       <div
-        className={`flex flex-col rounded min-h-120 w-full lg:w-120 py-6 px-4 bg-white opacity-90 items-between space-y-3`}
+        className={`flex flex-col rounded-lg min-h-120 w-full lg:w-120 py-4 px-4 bg-white opacity-90 items-between space-y-3`}
       >
         <div className={`flex flex-col w-full space-y-3`}>
           <ShakaContactFormName basis={{ ...basis }} />
@@ -104,7 +149,7 @@ export const ShakaContactForm: React.FC<TypesShakaContactForm> = ({
         <div className={`flex flex-col w-full space-y-6 `}>
           <div className={`flex flex-row w-full h-12 `}>
             <button
-              className={`btn btn-secondary rounded  opacity-90 flex-1 font-apercu text-opacity-50 text-white focus:text-white hover:text-white ${
+              className={`btn btn-secondary rounded-xl flex-1 font-apercu text-white focus:text-white hover:text-white ${
                 ContactShape.entracte ? `loading` : ``
               }`}
               onClick={lcaShakaContactFormSubmit}
@@ -112,6 +157,39 @@ export const ShakaContactForm: React.FC<TypesShakaContactForm> = ({
               {`${t(`glossary:submit`, `submit`)}`}
             </button>
           </div>
+
+          {ContactShape.submitted ? (
+            <>
+              <div
+                className={`flex flex-row w-full text-secondary-focus space-x-4 px-4`}
+              >
+                <svg
+                  xmlns={"http://www.w3.org/2000/svg"}
+                  viewBox={"0 0 24 24"}
+                  fill={"currentColor"}
+                  className={"w-6 h-6"}
+                >
+                  <path
+                    fillRule={"evenodd"}
+                    d={
+                      "M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                    }
+                    clipRule={"evenodd"}
+                  />
+                </svg>
+                <div className={`flex flex-row pt-[2px]`}>
+                  <p
+                    className={`font-apercu font-medium text-base text-secondary-focus font-bold `}
+                  >
+                    {`${t(
+                      `glossary:thank_you_we_will_be_in_touch`,
+                      `thank_you_we_will_be_in_touch`
+                    )}`}
+                  </p>
+                </div>
+              </div>
+            </>
+          ) : null}
 
           {ContactShape.inverse && ContactShape.thread ? (
             <>

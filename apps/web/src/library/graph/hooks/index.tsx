@@ -22,14 +22,48 @@ export type Scalars = {
   Float: number;
 };
 
+export type Mutation = {
+  __typename?: "Mutation";
+  ShakaGraph0001: ShakaGraphResolve0001;
+  ShakaGraphLnInvoiceCreate: ShakaGraphResolveLnInvoiceCreate;
+};
+
+export type MutationShakaGraph0001Args = {
+  figure: ShakaGraphFigures0001;
+};
+
+export type MutationShakaGraphLnInvoiceCreateArgs = {
+  figure: ShakaGraphFiguresLnInvoiceCreate;
+};
+
+export type Query = {
+  __typename?: "Query";
+  ShakaGraph0000: ShakaGraphResolve0000;
+  ShakaGraphLnInfo: ShakaGraphResolveLnInfo;
+};
+
+export type QueryShakaGraph0000Args = {
+  figure: ShakaGraphFigures0000;
+};
+
+export type QueryShakaGraphLnInfoArgs = {
+  figure: ShakaGraphFiguresLnInfo;
+};
+
 export type ShakaGraphData0000 = {
   __typename?: "ShakaGraphData0000";
+  notes?: Maybe<Array<Scalars["String"]>>;
+};
+
+export type ShakaGraphData0001 = {
+  __typename?: "ShakaGraphData0001";
   notes?: Maybe<Array<Scalars["String"]>>;
 };
 
 export type ShakaGraphDataLnInfo = {
   __typename?: "ShakaGraphDataLnInfo";
   notes?: Maybe<Array<Scalars["String"]>>;
+  version?: Maybe<Scalars["String"]>;
 };
 
 export type ShakaGraphDataLnInvoiceCreate = {
@@ -41,6 +75,13 @@ export type ShakaGraphDataLnInvoiceCreate = {
 
 export type ShakaGraphFigures0000 = {
   locale: Scalars["String"];
+};
+
+export type ShakaGraphFigures0001 = {
+  contact: Scalars["String"];
+  content: Scalars["String"];
+  locale: Scalars["String"];
+  title: Scalars["String"];
 };
 
 export type ShakaGraphFiguresLnInfo = {
@@ -55,6 +96,16 @@ export type ShakaGraphFiguresLnInvoiceCreate = {
 export type ShakaGraphResolve0000 = {
   __typename?: "ShakaGraphResolve0000";
   data?: Maybe<ShakaGraphData0000>;
+  hash: Scalars["String"];
+  message?: Maybe<Scalars["String"]>;
+  pass: Scalars["Boolean"];
+  ray: Scalars["String"];
+  timestamp: Scalars["Float"];
+};
+
+export type ShakaGraphResolve0001 = {
+  __typename?: "ShakaGraphResolve0001";
+  data?: Maybe<ShakaGraphData0001>;
   hash: Scalars["String"];
   message?: Maybe<Scalars["String"]>;
   pass: Scalars["Boolean"];
@@ -80,29 +131,6 @@ export type ShakaGraphResolveLnInvoiceCreate = {
   pass: Scalars["Boolean"];
   ray: Scalars["String"];
   timestamp: Scalars["Float"];
-};
-
-export type Mutation = {
-  __typename?: "Mutation";
-  ShakaGraphLnInvoiceCreate: ShakaGraphResolveLnInvoiceCreate;
-};
-
-export type MutationShakaGraphLnInvoiceCreateArgs = {
-  figure: ShakaGraphFiguresLnInvoiceCreate;
-};
-
-export type Query = {
-  __typename?: "Query";
-  ShakaGraph0000: ShakaGraphResolve0000;
-  ShakaGraphLnInfo: ShakaGraphResolveLnInfo;
-};
-
-export type QueryShakaGraph0000Args = {
-  figure: ShakaGraphFigures0000;
-};
-
-export type QueryShakaGraphLnInfoArgs = {
-  figure: ShakaGraphFiguresLnInfo;
 };
 
 export type ShakaGraphLnInfoQueryVariables = Exact<{
@@ -160,6 +188,26 @@ export type ShakaGraph0000Query = {
     hash: string;
     data?: {
       __typename?: "ShakaGraphData0000";
+      notes?: Array<string> | null;
+    } | null;
+  };
+};
+
+export type ShakaGraph0001MutationVariables = Exact<{
+  figure: ShakaGraphFigures0001;
+}>;
+
+export type ShakaGraph0001Mutation = {
+  __typename?: "Mutation";
+  ShakaGraph0001: {
+    __typename?: "ShakaGraphResolve0001";
+    pass: boolean;
+    message?: string | null;
+    timestamp: number;
+    hash: string;
+    ray: string;
+    data?: {
+      __typename?: "ShakaGraphData0001";
       notes?: Array<string> | null;
     } | null;
   };
@@ -354,4 +402,61 @@ export type ShakaGraph0000LazyQueryHookResult = ReturnType<
 export type ShakaGraph0000QueryResult = Apollo.QueryResult<
   ShakaGraph0000Query,
   ShakaGraph0000QueryVariables
+>;
+export const ShakaGraph0001Document = gql`
+  mutation ShakaGraph0001($figure: ShakaGraphFigures0001!) {
+    ShakaGraph0001(figure: $figure) {
+      pass
+      message
+      timestamp
+      hash
+      ray
+      data {
+        notes
+      }
+    }
+  }
+`;
+export type ShakaGraph0001MutationFn = Apollo.MutationFunction<
+  ShakaGraph0001Mutation,
+  ShakaGraph0001MutationVariables
+>;
+
+/**
+ * __useShakaGraph0001Mutation__
+ *
+ * To run a mutation, you first call `useShakaGraph0001Mutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useShakaGraph0001Mutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [shakaGraph0001Mutation, { data, loading, error }] = useShakaGraph0001Mutation({
+ *   variables: {
+ *      figure: // value for 'figure'
+ *   },
+ * });
+ */
+export function useShakaGraph0001Mutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    ShakaGraph0001Mutation,
+    ShakaGraph0001MutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    ShakaGraph0001Mutation,
+    ShakaGraph0001MutationVariables
+  >(ShakaGraph0001Document, options);
+}
+export type ShakaGraph0001MutationHookResult = ReturnType<
+  typeof useShakaGraph0001Mutation
+>;
+export type ShakaGraph0001MutationResult =
+  Apollo.MutationResult<ShakaGraph0001Mutation>;
+export type ShakaGraph0001MutationOptions = Apollo.BaseMutationOptions<
+  ShakaGraph0001Mutation,
+  ShakaGraph0001MutationVariables
 >;

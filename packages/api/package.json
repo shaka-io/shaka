@@ -65,6 +65,7 @@
     "@shaka-js/mail": "^0.2.3",
     "@shaka-js/models": "^0.2.3",
     "@shaka-js/voltage": "^0.2.1",
+    "axios": "^1.3.4",
     "body-parser": "^1.20.2",
     "class-validator": "^0.14.0",
     "connect-redis": "^6.1.3",

@@ -1,0 +1,12 @@
+mutation ShakaGraph0001($figure: ShakaGraphFigures0001!) {
+  ShakaGraph0001(figure: $figure) {
+    pass
+    message
+    timestamp
+    hash
+    ray
+    data {
+      notes
+    }
+  }
+}

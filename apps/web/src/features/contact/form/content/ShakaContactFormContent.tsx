@@ -37,7 +37,7 @@ export const ShakaContactFormContent: React.FC<
   return (
     <>
       <div
-        className={`flex flex-row w-full rounded h-48 bg-secondary opacity-90 items-start justify-center pl-2`}
+        className={`flex flex-row w-full rounded-lg h-48 bg-secondary opacity-90 items-start justify-center pl-2 py-2`}
       >
         <textarea
           placeholder={` ${t(`glossary:`, `Question`)}`} // @todo

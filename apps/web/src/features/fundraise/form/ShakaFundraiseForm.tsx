@@ -71,6 +71,8 @@ export const ShakaFundraiseForm: React.FC<TypesShakaFundraiseForm> = ({
     // loading start
     fold(writeFundraiseShapeEntracteTrue());
 
+    fold(writeFundraiseShapeLnInvoice(``));
+
     //
     // run
     const run = async () => {
@@ -78,16 +80,15 @@ export const ShakaFundraiseForm: React.FC<TypesShakaFundraiseForm> = ({
         //
         // start
 
-        console.log(`run`);
-        // eslint-disable-next-line no-promise-executor-return
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        console.log(`complete`);
+        const baseamount = FundraiseShape.moneykind === `fiat` ? `10` : `40000`;
 
         const { data } = await lnInvoiceGenerate({
           variables: {
             figure: {
               locale,
-              satoshis: `1`,
+              satoshis: `${FundraiseShape.moneykind === `fiat` ? `$` : ``}${
+                FundraiseShape.bundles.InvoiceAmount.letters || baseamount
+              }`,
             },
           },
         });
@@ -121,8 +122,9 @@ export const ShakaFundraiseForm: React.FC<TypesShakaFundraiseForm> = ({
     // end
     return;
   }, [
-    FundraiseShape.bundles.InvoiceAmount.letters.length,
+    FundraiseShape.bundles.InvoiceAmount.letters,
     FundraiseShape.bundles.InvoiceAmount.pass,
+    FundraiseShape.moneykind,
     fold,
     lnInvoiceGenerate,
     locale,

@@ -36,7 +36,7 @@ export const ShakaContactFormEmail: React.FC<TypesShakaContactFormEmail> = ({
   return (
     <>
       <div
-        className={`flex flex-row w-full rounded h-12 bg-secondary opacity-90 items-end justify-center pl-2`}
+        className={`flex flex-row w-full rounded-lg h-12 bg-secondary opacity-90 items-end justify-center pl-2`}
       >
         <input
           type={"text"}

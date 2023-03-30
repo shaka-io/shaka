@@ -12,6 +12,7 @@ export type TypesContactShapeBundles = {
 };
 
 export type TypesContactShapeThread =
+  | `glossary:please_allow_a_few_minutes_to_submit_another_question`
   | `glossary:please_write_3_words_minimum`
   | `glossary:please_use_a_valid_email`
   | "root";
@@ -23,6 +24,8 @@ export type TypesContactShapeValue = {
   //
   // shape type map ContactShape
   //
+  submitted: boolean;
+  submittedTime: number;
   bundles: TypesContactShapeBundles;
 };
 
@@ -38,7 +41,8 @@ const initialState: TypesContactShape = {
     //
     // shape initial ContactShape
     //
-
+    submitted: false,
+    submittedTime: 0,
     bundles: {
       ContactName: bundles.reference,
       ContactEmail: bundles.reference,
@@ -91,6 +95,23 @@ export const ContactShapeSlice = createSlice({
     //
     // shape definitions ContactShape
     //
+    writeContactShapeSubmitted: (
+      state,
+      { payload }: PayloadAction<boolean>
+    ) => {
+      state.value = {
+        ...state.value,
+        submitted: payload,
+      };
+    },
+
+    writeContactShapeSubmittedTime: (state) => {
+      const submittedTime = Date.now();
+      state.value = {
+        ...state.value,
+        submittedTime,
+      };
+    },
 
     writeContactShapeBundlesContactName: (
       state,
@@ -164,6 +185,8 @@ export const {
   // shape library ContactShape
   //
 
+  writeContactShapeSubmitted,
+  writeContactShapeSubmittedTime,
   writeContactShapeBundlesContactContent,
   writeContactShapeBundlesContactEmail,
   writeContactShapeBundlesContactName,
