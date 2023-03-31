@@ -14,7 +14,7 @@ export type FiguresMailClassSendMessage = {
   text: string;
 };
 
-export type ResolveMailClassSendMessage = "email-re" | "catch";
+export type ResolveMailClassSendMessage = "email-re" | "catch" | "send-failure";
 
 export class MailClass {
   private mailc: Client;
@@ -54,12 +54,12 @@ export class MailClass {
         "h:Reply-To": `${replypref}@${MAIL_BASE}`,
       };
 
-      console.log(message, `message`);
       const sendmail = await this.mailc.messages.create(MAIL_BASE, message);
-      console.log(JSON.stringify(sendmail, null, 4), `sendmail`); // @todo dev rm
-      return undefined;
+      if (sendmail.status === 200) {
+        return undefined;
+      }
+      return `send-failure`;
     } catch (e) {
-      console.log(e, `(dev) - catch`);
       return `catch`;
     }
   }
