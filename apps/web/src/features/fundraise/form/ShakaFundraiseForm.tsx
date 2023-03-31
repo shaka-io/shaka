@@ -1,20 +1,10 @@
-import { SatoshiV2Icon } from "@bitcoin-design/bitcoin-icons-react/filled";
-import { ShakaQr } from "@shaka-web-components/qr/ShakaQr";
 import { ShakaFundraiseFormAmount } from "@shaka-web-features/fundraise/form/amount/ShakaFundraiseFormAmount";
-import { useLocale } from "@shaka-web-hooks/use-locale";
-import { useShakaGraphLnInvoiceCreateMutation } from "@shaka-web-library/graph/hooks";
-import {
-  ofFundraiseShape,
-  TypesFundraiseShapeMoneyKind,
-  TypesFundraiseShapeThread,
-  writeFundraiseShapeEntracteFalse,
-  writeFundraiseShapeEntracteTrue,
-  writeFundraiseShapeInverseFalse,
-  writeFundraiseShapeInverseTrue,
-  writeFundraiseShapeLnInvoice,
-  writeFundraiseShapeMoneyKind,
-} from "@shaka-web-shapes/fundraise/FundraiseShape";
-import { useFold, useShape } from "@shaka-web-shapes/hooks";
+import { ShakaFundraiseFormGenerate } from "@shaka-web-features/fundraise/form/generate/ShakaFundraiseFormGenerate";
+import { ShakaFundraiseFormLightningQr } from "@shaka-web-features/fundraise/form/lightning-qr/ShakaFundraiseFormLightningQr";
+import { ShakaFundraiseFormMoney } from "@shaka-web-features/fundraise/form/money/ShakaFundraiseFormMoney";
+import { ShakaFundraiseFormNote } from "@shaka-web-features/fundraise/form/note/ShakaFundraiseFormNote";
+import { ofFundraiseShape } from "@shaka-web-shapes/fundraise/FundraiseShape";
+import { useShape } from "@shaka-web-shapes/hooks";
 import { TypesShakaBasis } from "@shaka-web-types/basis/TypesShakaBasis";
 import { useTranslation } from "next-i18next";
 import * as React from "react";
@@ -28,193 +18,76 @@ export const ShakaFundraiseForm: React.FC<TypesShakaFundraiseForm> = ({
 }: TypesShakaFundraiseForm) => {
   const { t } = useTranslation(basis.dictionary);
 
-  const fold = useFold();
-
   const FundraiseShape = useShape(ofFundraiseShape);
-
-  const locale = useLocale();
-  const [lnInvoiceGenerate] = useShakaGraphLnInvoiceCreateMutation();
-
-  const lcShakaFundraiseOriginToggleMoneyKind = React.useCallback(
-    (kind: TypesFundraiseShapeMoneyKind) => {
-      //
-      // @notes:
-      fold(writeFundraiseShapeMoneyKind(kind));
-
-      // end
-      return;
-    },
-    [fold]
-  );
-
-  const lcaShakaFundraiseFormSubmit = React.useCallback(async () => {
-    //
-    // @notes:
-
-    let th: TypesFundraiseShapeThread;
-
-    if (
-      FundraiseShape.bundles.InvoiceAmount.letters.length &&
-      !FundraiseShape.bundles.InvoiceAmount.pass
-    ) {
-      th = `root`;
-      fold(writeFundraiseShapeInverseTrue(th));
-      return;
-    }
-
-    //
-    // conditions
-
-    // error false
-    fold(writeFundraiseShapeInverseFalse());
-
-    // loading start
-    fold(writeFundraiseShapeEntracteTrue());
-
-    fold(writeFundraiseShapeLnInvoice(``));
-
-    //
-    // run
-    const run = async () => {
-      try {
-        //
-        // start
-
-        const baseamount = FundraiseShape.moneykind === `fiat` ? `10` : `40000`;
-
-        const { data } = await lnInvoiceGenerate({
-          variables: {
-            figure: {
-              locale,
-              satoshis: `${FundraiseShape.moneykind === `fiat` ? `$` : ``}${
-                FundraiseShape.bundles.InvoiceAmount.letters || baseamount
-              }`,
-            },
-          },
-        });
-
-        if (
-          data &&
-          data.ShakaGraphLnInvoiceCreate.pass &&
-          data.ShakaGraphLnInvoiceCreate.data?.ln
-        ) {
-          fold(
-            writeFundraiseShapeLnInvoice(data.ShakaGraphLnInvoiceCreate.data.ln)
-          );
-        }
-
-        //
-        // end
-      } catch (e) {
-        //
-        // catch
-      } finally {
-        //
-        // loading stop
-        fold(writeFundraiseShapeEntracteFalse());
-        //
-        // end
-      }
-    };
-    run();
-
-    //
-    // end
-    return;
-  }, [
-    FundraiseShape.bundles.InvoiceAmount.letters,
-    FundraiseShape.bundles.InvoiceAmount.pass,
-    FundraiseShape.moneykind,
-    fold,
-    lnInvoiceGenerate,
-    locale,
-  ]);
 
   return (
     <>
       <div
         className={`flex flex-col rounded min-h-120 w-full md:w-120 py-6 px-4 space-y-3 bg-white opacity-90`}
       >
-        <div
-          className={`flex flex-col rounded w-full h-36 px-4 justify-center items-center bg-accent opacity-90`}
-        >
-          <div className={`flex flex-row h-20 w-full p-1 lg:justify-end`}>
-            <div
-              className={`flex flex-row max-md:basis-3/4 w-full h-full items-center justify-center `}
-            >
-              <div className={`flex flex-row items-center justify-center w-16`}>
-                {FundraiseShape.moneykind === `btc` ? (
-                  <>
-                    <SatoshiV2Icon
-                      style={{
-                        height: "48px",
-                        width: "48px",
-                        color: "#ffffff",
-                      }}
-                    />
-                  </>
-                ) : (
-                  <>
-                    <p
-                      className={`font-apercu font-medium text-4xl text-white `}
-                    >
-                      {`$`}
-                    </p>
-                  </>
-                )}
-              </div>
+        <ShakaFundraiseFormAmount basis={{ ...basis }} />
+        <ShakaFundraiseFormMoney basis={{ ...basis }} />
+        <ShakaFundraiseFormNote basis={{ ...basis }} />
+        <ShakaFundraiseFormGenerate basis={{ ...basis }} />
+        <ShakaFundraiseFormLightningQr basis={{ ...basis }} />
+        {!FundraiseShape.lndata ? (
+          <div className={`flex h-36`}>
+            {FundraiseShape.lnverifyprevious ? (
               <div
-                className={`flex flex-row w-full h-full items-center justify-center`}
+                className={`flex flex-col w-full items-center justify-center`}
               >
-                <ShakaFundraiseFormAmount basis={{ ...basis }} />
+                <div className={`flex text-accent-focus`}>
+                  <svg
+                    xmlns={"http://www.w3.org/2000/svg"}
+                    viewBox={"0 0 24 24"}
+                    fill={"currentColor"}
+                    className={"w-6 h-6"}
+                  >
+                    <path
+                      d={
+                        "M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"
+                      }
+                    />
+                  </svg>
+                </div>
+                <div className={`flex `}>
+                  <p
+                    className={`font-apercu font-medium text-base text-accent-focus font-bold `}
+                  >
+                    {`${t(`glossary:thank_you`, `thank_you`)}!`}
+                  </p>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div
+                className={`flex flex-col w-full items-center justify-center`}
+              >
+                <div className={`flex text-accent-focus`}>
+                  <svg
+                    xmlns={"http://www.w3.org/2000/svg"}
+                    viewBox={"0 0 24 24"}
+                    fill={"currentColor"}
+                    className={"w-16 h-16 opacity-20"}
+                  >
+                    <path
+                      fillRule={"evenodd"}
+                      d={
+                        "M12.963 2.286a.75.75 0 00-1.071-.136 9.742 9.742 0 00-3.539 6.177A7.547 7.547 0 016.648 6.61a.75.75 0 00-1.152-.082A9 9 0 1015.68 4.534a7.46 7.46 0 01-2.717-2.248zM15.75 14.25a3.75 3.75 0 11-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 011.925-3.545 3.75 3.75 0 013.255 3.717z"
+                      }
+                      clipRule={"evenodd"}
+                    />
+                  </svg>
+                </div>
+                <div className={`flex `}>
+                  <p
+                    className={`font-apercu font-medium text-base text-accent-focus font-bold `}
+                  >
+                    {`${t(`glossary:`, ``)}`}
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-
-        <div
-          className={`flex flex-row rounded w-full h-12 bg-accent opacity-80 items-center justify-between space-x-3 px-2`}
-        >
-          <button
-            className={`btn btn-sm btn-accent bg-shaka-accent_relief flex-1 font-apercu text-opacity-50 focus:text-white hover:text-white`}
-            onClick={() => lcShakaFundraiseOriginToggleMoneyKind("btc")}
-          >
-            {"Bitcoin"}
-          </button>
-          <button
-            className={`btn btn-sm btn-accent bg-shaka-accent_relief flex-1 font-apercu text-opacity-50 focus:text-white hover:text-white`}
-            onClick={() => lcShakaFundraiseOriginToggleMoneyKind("fiat")}
-          >
-            {`${t(`glossary:fiat`, `fiat`)}`}
-          </button>
-        </div>
-
-        <div
-          className={`flex flex-row rounded w-full h-12 bg-accent items-center opacity-80 px-2`}
-        >
-          <button
-            className={`btn btn-sm btn-accent bg-shaka-accent_relief flex-1 font-apercu text-opacity-50 focus:text-white hover:text-white ${
-              FundraiseShape.entracte ? `loading` : ``
-            }`}
-            onClick={lcaShakaFundraiseFormSubmit}
-          >
-            {`${t(`glossary:generate`, `generate`)}`}
-          </button>
-        </div>
-
-        {FundraiseShape.lninvoice ? (
-          <>
-            <div className={`flex flex-row w-full justify-center`}>
-              <ShakaQr
-                basis={{
-                  ...basis,
-                  data: FundraiseShape.lninvoice,
-                  size: 300,
-                  cl: `text-accent-content`,
-                }}
-              />
-            </div>
-          </>
         ) : null}
       </div>
     </>

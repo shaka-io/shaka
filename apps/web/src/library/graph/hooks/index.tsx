@@ -25,11 +25,16 @@ export type Scalars = {
 export type Mutation = {
   __typename?: "Mutation";
   ShakaGraph0001: ShakaGraphResolve0001;
+  ShakaGraphLnInvoiceConfirm: ShakaGraphResolveLnInvoiceConfirm;
   ShakaGraphLnInvoiceCreate: ShakaGraphResolveLnInvoiceCreate;
 };
 
 export type MutationShakaGraph0001Args = {
   figure: ShakaGraphFigures0001;
+};
+
+export type MutationShakaGraphLnInvoiceConfirmArgs = {
+  figure: ShakaGraphFiguresLnInvoiceConfirm;
 };
 
 export type MutationShakaGraphLnInvoiceCreateArgs = {
@@ -66,6 +71,12 @@ export type ShakaGraphDataLnInfo = {
   version?: Maybe<Scalars["String"]>;
 };
 
+export type ShakaGraphDataLnInvoiceConfirm = {
+  __typename?: "ShakaGraphDataLnInvoiceConfirm";
+  notes?: Maybe<Array<Scalars["String"]>>;
+  settled: Scalars["Boolean"];
+};
+
 export type ShakaGraphDataLnInvoiceCreate = {
   __typename?: "ShakaGraphDataLnInvoiceCreate";
   hash: Scalars["String"];
@@ -85,6 +96,11 @@ export type ShakaGraphFigures0001 = {
 };
 
 export type ShakaGraphFiguresLnInfo = {
+  locale: Scalars["String"];
+};
+
+export type ShakaGraphFiguresLnInvoiceConfirm = {
+  hash: Scalars["String"];
   locale: Scalars["String"];
 };
 
@@ -123,6 +139,16 @@ export type ShakaGraphResolveLnInfo = {
   timestamp: Scalars["Float"];
 };
 
+export type ShakaGraphResolveLnInvoiceConfirm = {
+  __typename?: "ShakaGraphResolveLnInvoiceConfirm";
+  data?: Maybe<ShakaGraphDataLnInvoiceConfirm>;
+  hash: Scalars["String"];
+  message?: Maybe<Scalars["String"]>;
+  pass: Scalars["Boolean"];
+  ray: Scalars["String"];
+  timestamp: Scalars["Float"];
+};
+
 export type ShakaGraphResolveLnInvoiceCreate = {
   __typename?: "ShakaGraphResolveLnInvoiceCreate";
   data?: Maybe<ShakaGraphDataLnInvoiceCreate>;
@@ -149,6 +175,26 @@ export type ShakaGraphLnInfoQuery = {
     data?: {
       __typename?: "ShakaGraphDataLnInfo";
       notes?: Array<string> | null;
+    } | null;
+  };
+};
+
+export type ShakaGraphLnInvoiceConfirmMutationVariables = Exact<{
+  figure: ShakaGraphFiguresLnInvoiceConfirm;
+}>;
+
+export type ShakaGraphLnInvoiceConfirmMutation = {
+  __typename?: "Mutation";
+  ShakaGraphLnInvoiceConfirm: {
+    __typename?: "ShakaGraphResolveLnInvoiceConfirm";
+    pass: boolean;
+    message?: string | null;
+    timestamp: number;
+    hash: string;
+    data?: {
+      __typename?: "ShakaGraphDataLnInvoiceConfirm";
+      notes?: Array<string> | null;
+      settled: boolean;
     } | null;
   };
 };
@@ -278,6 +324,66 @@ export type ShakaGraphLnInfoQueryResult = Apollo.QueryResult<
   ShakaGraphLnInfoQuery,
   ShakaGraphLnInfoQueryVariables
 >;
+export const ShakaGraphLnInvoiceConfirmDocument = gql`
+  mutation ShakaGraphLnInvoiceConfirm(
+    $figure: ShakaGraphFiguresLnInvoiceConfirm!
+  ) {
+    ShakaGraphLnInvoiceConfirm(figure: $figure) {
+      pass
+      message
+      timestamp
+      hash
+      data {
+        notes
+        settled
+      }
+    }
+  }
+`;
+export type ShakaGraphLnInvoiceConfirmMutationFn = Apollo.MutationFunction<
+  ShakaGraphLnInvoiceConfirmMutation,
+  ShakaGraphLnInvoiceConfirmMutationVariables
+>;
+
+/**
+ * __useShakaGraphLnInvoiceConfirmMutation__
+ *
+ * To run a mutation, you first call `useShakaGraphLnInvoiceConfirmMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useShakaGraphLnInvoiceConfirmMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [shakaGraphLnInvoiceConfirmMutation, { data, loading, error }] = useShakaGraphLnInvoiceConfirmMutation({
+ *   variables: {
+ *      figure: // value for 'figure'
+ *   },
+ * });
+ */
+export function useShakaGraphLnInvoiceConfirmMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    ShakaGraphLnInvoiceConfirmMutation,
+    ShakaGraphLnInvoiceConfirmMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    ShakaGraphLnInvoiceConfirmMutation,
+    ShakaGraphLnInvoiceConfirmMutationVariables
+  >(ShakaGraphLnInvoiceConfirmDocument, options);
+}
+export type ShakaGraphLnInvoiceConfirmMutationHookResult = ReturnType<
+  typeof useShakaGraphLnInvoiceConfirmMutation
+>;
+export type ShakaGraphLnInvoiceConfirmMutationResult =
+  Apollo.MutationResult<ShakaGraphLnInvoiceConfirmMutation>;
+export type ShakaGraphLnInvoiceConfirmMutationOptions =
+  Apollo.BaseMutationOptions<
+    ShakaGraphLnInvoiceConfirmMutation,
+    ShakaGraphLnInvoiceConfirmMutationVariables
+  >;
 export const ShakaGraphLnInvoiceCreateDocument = gql`
   mutation ShakaGraphLnInvoiceCreate(
     $figure: ShakaGraphFiguresLnInvoiceCreate!

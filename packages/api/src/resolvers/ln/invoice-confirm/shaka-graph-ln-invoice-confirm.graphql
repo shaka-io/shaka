@@ -1,0 +1,14 @@
+mutation ShakaGraphLnInvoiceConfirm(
+  $figure: ShakaGraphFiguresLnInvoiceConfirm!
+) {
+  ShakaGraphLnInvoiceConfirm(figure: $figure) {
+    pass
+    message
+    timestamp
+    hash
+    data {
+      notes
+      settled
+    }
+  }
+}

@@ -7,6 +7,7 @@ const { bundles } = classshaka;
 
 export type TypesContactShapeBundles = {
   InvoiceAmount: TypesLibraryBundles;
+  InvoiceNote: TypesLibraryBundles;
 };
 
 export type TypesFundraiseShapeMoneyKind = "btc" | "fiat";
@@ -23,7 +24,14 @@ export type TypesFundraiseShapeValue = {
 
   moneykind: TypesFundraiseShapeMoneyKind;
 
-  lninvoice: string;
+  lndata: string;
+  lnhash: string;
+
+  lnverifyentrace: boolean;
+  lnverify: boolean;
+  lnverifyattempts: number;
+  lnverifytime: number;
+  lnverifyprevious: boolean;
 
   bundles: TypesContactShapeBundles;
 };
@@ -42,10 +50,18 @@ const initialState: TypesFundraiseShape = {
     //
 
     moneykind: `btc`,
-    lninvoice: ``,
+    lndata: ``,
+    lnhash: ``,
+
+    lnverifyentrace: false,
+    lnverify: false,
+    lnverifyattempts: 0,
+    lnverifytime: 0,
+    lnverifyprevious: false,
 
     bundles: {
       InvoiceAmount: bundles.reference,
+      InvoiceNote: bundles.reference,
     },
   },
 };
@@ -54,8 +70,11 @@ export const FundraiseShapeSlice = createSlice({
   name: "FundraiseShape",
   initialState,
   reducers: {
-    initFundraiseShape: (state) => {
-      state.value = initialState.value;
+    initFundraiseShape: (state, { payload }: PayloadAction<boolean>) => {
+      state.value = {
+        ...initialState.value,
+        lnverifyprevious: payload,
+      };
     },
 
     writeFundraiseShapeEntracteTrue: (state) => {
@@ -107,11 +126,49 @@ export const FundraiseShapeSlice = createSlice({
 
     writeFundraiseShapeLnInvoice: (
       state,
-      { payload }: PayloadAction<string>
+      { payload }: PayloadAction<[string, string]>
     ) => {
       state.value = {
         ...state.value,
-        lninvoice: payload,
+        lndata: payload[0],
+        lnhash: payload[1],
+      };
+    },
+
+    writeFundraiseShapeLnVerify: (
+      state,
+      { payload }: PayloadAction<boolean>
+    ) => {
+      state.value = {
+        ...state.value,
+        lnverify: payload,
+      };
+    },
+
+    writeFundraiseShapeLnVerifyAttempts: (state) => {
+      const lnverifyattempts = state.value.lnverifyattempts + 1;
+
+      state.value = {
+        ...state.value,
+        lnverifyattempts,
+      };
+    },
+
+    writeFundraiseShapeLnVerifyTime: (state) => {
+      const lnverifytime = Date.now();
+      state.value = {
+        ...state.value,
+        lnverifytime,
+      };
+    },
+
+    writeFundraiseShapeLnVerifyEntracte: (
+      state,
+      { payload }: PayloadAction<boolean>
+    ) => {
+      state.value = {
+        ...state.value,
+        lnverifyentrace: payload,
       };
     },
 
@@ -134,6 +191,25 @@ export const FundraiseShapeSlice = createSlice({
         },
       };
     },
+    writeFundraiseShapeBundlesInvoiceNote: (
+      state,
+      action: PayloadAction<{ letters: string; pass: boolean }>
+    ) => {
+      const { letters, pass } = action.payload;
+      const InvoiceNote = bundles.cyclic.letters({
+        bundle: state.value.bundles.InvoiceNote,
+        letters,
+        pass,
+      });
+
+      state.value = {
+        ...state.value,
+        bundles: {
+          ...state.value.bundles,
+          InvoiceNote,
+        },
+      };
+    },
   },
 });
 
@@ -150,6 +226,12 @@ export const {
   writeFundraiseShapeLnInvoice,
 
   writeFundraiseShapeBundlesInvoiceAmount,
+  writeFundraiseShapeBundlesInvoiceNote,
+
+  writeFundraiseShapeLnVerify,
+  writeFundraiseShapeLnVerifyAttempts,
+  writeFundraiseShapeLnVerifyTime,
+  writeFundraiseShapeLnVerifyEntracte,
 } = FundraiseShapeSlice.actions;
 
 export const ofFundraiseShape = (

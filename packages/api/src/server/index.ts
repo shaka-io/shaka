@@ -14,6 +14,7 @@ import { appmethod } from "../app";
 import { routermethod } from "../app/router";
 import { ClassesApi } from "../classes";
 import { ShakaGraphLnInfo } from "../resolvers/ln/info/shaka-graph-ln-info-resolver";
+import { ShakaGraphLnInvoiceConfirm } from "../resolvers/ln/invoice-confirm/shaka-graph-ln-invoice-confirm-resolver";
 import { ShakaGraphLnInvoiceCreate } from "../resolvers/ln/invoice-create/shaka-graph-ln-invoice-create-resolver";
 import { ShakaGraph0000 } from "../resolvers/numeric/0000/shaka-graph-0000-resolver";
 import { ShakaGraph0001 } from "../resolvers/numeric/0001/shaka-graph-0001-resolver";
@@ -41,6 +42,7 @@ export const server = async (
         ShakaGraph0001,
         ShakaGraphLnInfo,
         ShakaGraphLnInvoiceCreate,
+        ShakaGraphLnInvoiceConfirm,
       ],
       scalarsMap: [],
       validate: false,

@@ -77,7 +77,7 @@ export const ShakaFundraiseOrigin: React.FC<TypesShakaFundraiseOrigin> = ({
               <p
                 className={`font-apercu font-medium text-3xl text-white font-bold `}
               >
-                {`${t(`glossary:donation`, `donation`)}`}
+                {`${t(`glossary:crowdfund`, `crowdfund`)}`}
               </p>
             </div>
             <div className={`flex text-white`}>

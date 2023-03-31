@@ -181,10 +181,10 @@ export const ShakaContactForm: React.FC<TypesShakaContactForm> = ({
                   <p
                     className={`font-apercu font-medium text-base text-secondary-focus font-bold `}
                   >
-                    {`${t(
-                      `glossary:thank_you_we_will_be_in_touch`,
-                      `thank_you_we_will_be_in_touch`
-                    )}`}
+                    {`${t(`glossary:thank_you`, `thank_you`)}, ${t(
+                      `glossary:we_will_be_in_touch`,
+                      `we_will_be_in_touch`
+                    ).toLowerCase()}!`}
                   </p>
                 </div>
               </div>
