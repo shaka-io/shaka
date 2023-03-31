@@ -69,6 +69,8 @@ Pura vida!
 — The Shaka Team`,
     });
 
+    console.log(mailsend, `mailsend`);
+
     if (typeof mailsend === `string`) {
       message = `!-mail-send`;
       return handler.error<string>(message);

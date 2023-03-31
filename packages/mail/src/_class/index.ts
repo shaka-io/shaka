@@ -54,6 +54,7 @@ export class MailClass {
         "h:Reply-To": `${replypref}@${MAIL_BASE}`,
       };
 
+      console.log(message, `message`);
       const sendmail = await this.mailc.messages.create(MAIL_BASE, message);
       console.log(JSON.stringify(sendmail, null, 4), `sendmail`); // @todo dev rm
       return undefined;
