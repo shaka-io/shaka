@@ -55,7 +55,7 @@ export const ShakaGraphEvaluate0001 = async (
     message = `complete`;
 
     const mailsend = await ctx.classes.mail.send({
-      to: process.env.LOCAL_TEST_EMAIL || ``, // contact,
+      to: contact,
       frompref: `contact`,
       subject: `Shaka | We received your question`,
       text: `Hello ${title},
