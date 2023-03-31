@@ -14,7 +14,7 @@
     "type": "git",
     "url": "ssh://github.com/shaka-io/shaka.git"
   },
-  "version": "1.2.1",
+  "version": "1.2.2",
   "workspaces": {
     "nohoist": [
       "**"

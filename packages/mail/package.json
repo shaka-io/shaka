@@ -15,7 +15,7 @@
     "url": "ssh://github.com/shaka-io/shaka.git"
   },
   "type": "commonjs",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
