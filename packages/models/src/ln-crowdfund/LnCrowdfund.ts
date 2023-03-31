@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { ModelsRecords } from "../structures/ModelsRecords";
 
 @ObjectType()
 @Entity()
@@ -50,6 +51,9 @@ export class LnCrowdfund extends BaseEntity {
   //
   // model records
   //
+  @Field(() => ModelsRecords, { nullable: true })
+  @Column({ type: "json", nullable: true, default: null })
+  records!: ModelsRecords | null;
 
   //
   //
