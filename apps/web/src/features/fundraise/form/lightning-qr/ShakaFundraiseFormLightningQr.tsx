@@ -32,13 +32,53 @@ export const ShakaFundraiseFormLightningQr: React.FC<
   const locale = useLocale();
   const [lnInvoiceConfirm] = useShakaGraphLnInvoiceConfirmMutation();
 
+  const lcaShakaFundraiseFormLightningQrOnPaymentVerified =
+    React.useCallback(() => {
+      // async
+      // @notes:
+
+      //
+      // conditions
+
+      // error false
+      // fold()
+
+      // loading start
+      // fold()
+
+      fold(initFundraiseShape(true));
+      fold(writeFundraiseShapeLnVerifyTime());
+
+      //
+      // run
+      const run = async () => {
+        try {
+          //
+          // start
+          //
+          // end
+        } catch (e) {
+          //
+          // catch
+        } finally {
+          //
+          // loading stop
+          // fold()
+          //
+          // end
+        }
+      };
+      run();
+
+      //
+      // end
+      return;
+    }, [fold]);
+
   const { reset: timereset } = useElapsedTime({
     isPlaying: FundraiseShape.lnverify,
     duration: 3,
-    onComplete: () => {
-      fold(initFundraiseShape(true));
-      fold(writeFundraiseShapeLnVerifyTime());
-    },
+    onComplete: lcaShakaFundraiseFormLightningQrOnPaymentVerified,
   });
 
   const lcaShakaFundraiseFormInvoiceConfirm = React.useCallback(async () => {
@@ -77,8 +117,6 @@ export const ShakaFundraiseFormLightningQr: React.FC<
             },
           },
         });
-
-        console.log(JSON.stringify(data, null, 4), `data`);
 
         fold(writeFundraiseShapeLnVerifyAttempts());
 

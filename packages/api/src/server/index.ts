@@ -18,6 +18,7 @@ import { ShakaGraphLnInvoiceConfirm } from "../resolvers/ln/invoice-confirm/shak
 import { ShakaGraphLnInvoiceCreate } from "../resolvers/ln/invoice-create/shaka-graph-ln-invoice-create-resolver";
 import { ShakaGraph0000 } from "../resolvers/numeric/0000/shaka-graph-0000-resolver";
 import { ShakaGraph0001 } from "../resolvers/numeric/0001/shaka-graph-0001-resolver";
+import { ShakaGraph0002 } from "../resolvers/numeric/0002/shaka-graph-0002-resolver";
 import { envapi } from "../_env";
 import { TypesServerContext } from "./types";
 
@@ -40,6 +41,7 @@ export const server = async (
       resolvers: [
         ShakaGraph0000,
         ShakaGraph0001,
+        ShakaGraph0002,
         ShakaGraphLnInfo,
         ShakaGraphLnInvoiceCreate,
         ShakaGraphLnInvoiceConfirm,

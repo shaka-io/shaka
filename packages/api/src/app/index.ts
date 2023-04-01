@@ -8,7 +8,7 @@ export const appmethod = (router: Router): Application => {
   const app: Application = express();
 
   const corsOptions: CorsOptions = {
-    origin: API_CORS_ORIGIN,
+    origin: API_CORS_ORIGIN.split(`,`),
     credentials: true,
   };
   app.use(cors(corsOptions));
