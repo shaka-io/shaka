@@ -392,7 +392,7 @@ export const ShakaFundraiseFormLightningQr: React.FC<
 
       {FundraiseShape.toastvisible ? (
         <>
-          <div className={"toast toast-center"}>
+          <div className={"toast toast-center w-96"}>
             <div className={"alert bg-shaka-accent_relief"}>
               <div className={"flex flex-row px-3 space-x-3"}>
                 <div className={`flex text-accent-content`}>
