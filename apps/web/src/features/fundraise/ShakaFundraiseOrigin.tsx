@@ -1,6 +1,8 @@
 import { ShakaFooter } from "@shaka-web-components/footer/ShakaFooter";
 import { ShakaNavigation } from "@shaka-web-components/navigation/ShakaNavigation";
 import { ShakaFundraiseForm } from "@shaka-web-features/fundraise/form/ShakaFundraiseForm";
+import { ShakaFundraiseList } from "@shaka-web-features/fundraise/list/ShakaFundraiseList";
+import { ofFundraiseShape } from "@shaka-web-shapes/fundraise/FundraiseShape";
 import { useShape } from "@shaka-web-shapes/hooks";
 import { ofRootShape } from "@shaka-web-shapes/root/RootShape";
 import { TypesShakaBasis } from "@shaka-web-types/basis/TypesShakaBasis";
@@ -19,6 +21,7 @@ export const ShakaFundraiseOrigin: React.FC<TypesShakaFundraiseOrigin> = ({
   const { t } = useTranslation(basis.dictionary);
 
   const RootShape = useShape(ofRootShape);
+  const FundraiseShape = useShape(ofFundraiseShape);
 
   const router = useRouter();
 
@@ -100,6 +103,9 @@ export const ShakaFundraiseOrigin: React.FC<TypesShakaFundraiseOrigin> = ({
           <div className={`flex flex-col w-full pt-8 px-8 items-center  `}>
             <ShakaFundraiseForm basis={{ ...basis }} />
           </div>
+          {FundraiseShape.lnlist.length ? (
+            <ShakaFundraiseList basis={{ ...basis }} />
+          ) : null}
         </div>
       </div>
       <ShakaFooter basis={{ ...basis, bg: `bg-accent` }} />

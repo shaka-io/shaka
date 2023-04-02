@@ -1,12 +1,18 @@
 import { ShakaQr } from "@shaka-web-components/qr/ShakaQr";
 import { useLocale } from "@shaka-web-hooks/use-locale";
-import { useShakaGraphLnInvoiceConfirmMutation } from "@shaka-web-library/graph/hooks";
 import {
-  initFundraiseShape,
+  useShakaGraph0002Mutation,
+  useShakaGraphLnInvoiceConfirmMutation,
+} from "@shaka-web-library/graph/hooks";
+import {
+  initFundraiseShapeBundles,
   ofFundraiseShape,
+  writeFundraiseShapeLnListAdd,
   writeFundraiseShapeLnVerify,
-  writeFundraiseShapeLnVerifyAttempts,
+  writeFundraiseShapeLnVerifyAttemptsInc,
+  writeFundraiseShapeLnVerifyAttemptsInit,
   writeFundraiseShapeLnVerifyEntracte,
+  writeFundraiseShapeLnVerifyPrevious,
   writeFundraiseShapeLnVerifyTime,
 } from "@shaka-web-shapes/fundraise/FundraiseShape";
 import { useFold, useShape } from "@shaka-web-shapes/hooks";
@@ -31,6 +37,7 @@ export const ShakaFundraiseFormLightningQr: React.FC<
   console.log(JSON.stringify(FundraiseShape, null, 4), `FundraiseShape`);
   const locale = useLocale();
   const [lnInvoiceConfirm] = useShakaGraphLnInvoiceConfirmMutation();
+  const [graph0002] = useShakaGraph0002Mutation();
 
   const lcaShakaFundraiseFormLightningQrOnPaymentVerified =
     React.useCallback(() => {
@@ -46,8 +53,10 @@ export const ShakaFundraiseFormLightningQr: React.FC<
       // loading start
       // fold()
 
-      fold(initFundraiseShape(true));
+      fold(initFundraiseShapeBundles());
+      fold(writeFundraiseShapeLnVerifyPrevious(true));
       fold(writeFundraiseShapeLnVerifyTime());
+      fold(writeFundraiseShapeLnVerifyAttemptsInit());
 
       //
       // run
@@ -55,6 +64,30 @@ export const ShakaFundraiseFormLightningQr: React.FC<
         try {
           //
           // start
+
+          const { data: graph0002d } = await graph0002({
+            variables: {
+              figure: {
+                locale,
+                amount: FundraiseShape.bundles.InvoiceAmount.letters,
+                name: FundraiseShape.bundles.InvoiceFrom.letters,
+                note: FundraiseShape.bundles.InvoiceNote.letters,
+              },
+            },
+          });
+
+          if (graph0002d?.ShakaGraph0002.pass) {
+            fold(
+              writeFundraiseShapeLnListAdd({
+                key: `${Date.now()}`,
+                created: `${Date.now()}`,
+                amount: FundraiseShape.bundles.InvoiceAmount.letters,
+                name: FundraiseShape.bundles.InvoiceFrom.letters,
+                note: FundraiseShape.bundles.InvoiceNote.letters,
+              })
+            );
+          }
+
           //
           // end
         } catch (e) {
@@ -73,7 +106,14 @@ export const ShakaFundraiseFormLightningQr: React.FC<
       //
       // end
       return;
-    }, [fold]);
+    }, [
+      FundraiseShape.bundles.InvoiceAmount.letters,
+      FundraiseShape.bundles.InvoiceFrom.letters,
+      FundraiseShape.bundles.InvoiceNote.letters,
+      fold,
+      graph0002,
+      locale,
+    ]);
 
   const { reset: timereset } = useElapsedTime({
     isPlaying: FundraiseShape.lnverify,
@@ -118,7 +158,7 @@ export const ShakaFundraiseFormLightningQr: React.FC<
           },
         });
 
-        fold(writeFundraiseShapeLnVerifyAttempts());
+        fold(writeFundraiseShapeLnVerifyAttemptsInc());
 
         if (
           data?.ShakaGraphLnInvoiceConfirm.pass &&
@@ -179,13 +219,7 @@ export const ShakaFundraiseFormLightningQr: React.FC<
                 <p
                   className={`font-apercu font-medium text-base text-accent-focus font-bold `}
                 >
-                  {`${FundraiseShape.moneykind === `btc` ? `₿sat` : `$`} ${
-                    FundraiseShape.bundles.InvoiceAmount.letters.length
-                      ? FundraiseShape.bundles.InvoiceAmount.letters
-                      : `${
-                          FundraiseShape.moneykind === `btc` ? `40,000` : `10`
-                        }`
-                  }`}
+                  {FundraiseShape.lnamount}
                 </p>
               </div>
             </div>
@@ -268,7 +302,7 @@ export const ShakaFundraiseFormLightningQr: React.FC<
                   {`${t(`glossary:thank_you`, `thank_you`)}! ${t(
                     `glossary:we_received_your_payment`,
                     `we_received_your_payment`
-                  )}`}
+                  )}.`}
                 </p>
               </div>
             ) : null}

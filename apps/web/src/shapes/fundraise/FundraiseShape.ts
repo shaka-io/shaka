@@ -5,8 +5,17 @@ import { TypesLibraryBundles } from "@wavesrcool/library/lib/bundles/_types";
 
 const { bundles } = classshaka;
 
+export type TypesFundraiseShapeLnList = {
+  created: string;
+  key: string;
+  name?: string | null | undefined;
+  note?: string | null | undefined;
+  amount: string;
+};
+
 export type TypesContactShapeBundles = {
   InvoiceAmount: TypesLibraryBundles;
+  InvoiceFrom: TypesLibraryBundles;
   InvoiceNote: TypesLibraryBundles;
 };
 
@@ -26,6 +35,7 @@ export type TypesFundraiseShapeValue = {
 
   lndata: string;
   lnhash: string;
+  lnamount: string;
 
   lnverifyentrace: boolean;
   lnverify: boolean;
@@ -34,6 +44,8 @@ export type TypesFundraiseShapeValue = {
   lnverifyprevious: boolean;
 
   bundles: TypesContactShapeBundles;
+
+  lnlist: TypesFundraiseShapeLnList[];
 };
 
 export type TypesFundraiseShape = {
@@ -52,6 +64,7 @@ const initialState: TypesFundraiseShape = {
     moneykind: `btc`,
     lndata: ``,
     lnhash: ``,
+    lnamount: ``,
 
     lnverifyentrace: false,
     lnverify: false,
@@ -61,8 +74,11 @@ const initialState: TypesFundraiseShape = {
 
     bundles: {
       InvoiceAmount: bundles.reference,
+      InvoiceFrom: bundles.reference,
       InvoiceNote: bundles.reference,
     },
+
+    lnlist: [],
   },
 };
 
@@ -70,10 +86,20 @@ export const FundraiseShapeSlice = createSlice({
   name: "FundraiseShape",
   initialState,
   reducers: {
-    initFundraiseShape: (state, { payload }: PayloadAction<boolean>) => {
+    initFundraiseShape: (state) => {
       state.value = {
         ...initialState.value,
-        lnverifyprevious: payload,
+      };
+    },
+
+    initFundraiseShapeBundles: (state) => {
+      state.value = {
+        ...state.value,
+        bundles: {
+          InvoiceAmount: bundles.reference,
+          InvoiceFrom: bundles.reference,
+          InvoiceNote: bundles.reference,
+        },
       };
     },
 
@@ -145,12 +171,29 @@ export const FundraiseShapeSlice = createSlice({
       };
     },
 
-    writeFundraiseShapeLnVerifyAttempts: (state) => {
+    writeFundraiseShapeLnVerifyPrevious: (
+      state,
+      { payload }: PayloadAction<boolean>
+    ) => {
+      state.value = {
+        ...state.value,
+        lnverifyprevious: payload,
+      };
+    },
+
+    writeFundraiseShapeLnVerifyAttemptsInc: (state) => {
       const lnverifyattempts = state.value.lnverifyattempts + 1;
 
       state.value = {
         ...state.value,
         lnverifyattempts,
+      };
+    },
+
+    writeFundraiseShapeLnVerifyAttemptsInit: (state) => {
+      state.value = {
+        ...state.value,
+        lnverifyattempts: 0,
       };
     },
 
@@ -169,6 +212,16 @@ export const FundraiseShapeSlice = createSlice({
       state.value = {
         ...state.value,
         lnverifyentrace: payload,
+      };
+    },
+
+    writeFundraiseShapeLnAmount: (
+      state,
+      { payload }: PayloadAction<string>
+    ) => {
+      state.value = {
+        ...state.value,
+        lnamount: payload,
       };
     },
 
@@ -191,6 +244,27 @@ export const FundraiseShapeSlice = createSlice({
         },
       };
     },
+
+    writeFundraiseShapeBundlesInvoiceFrom: (
+      state,
+      action: PayloadAction<{ letters: string; pass: boolean }>
+    ) => {
+      const { letters, pass } = action.payload;
+      const InvoiceFrom = bundles.cyclic.letters({
+        bundle: state.value.bundles.InvoiceFrom,
+        letters,
+        pass,
+      });
+
+      state.value = {
+        ...state.value,
+        bundles: {
+          ...state.value.bundles,
+          InvoiceFrom,
+        },
+      };
+    },
+
     writeFundraiseShapeBundlesInvoiceNote: (
       state,
       action: PayloadAction<{ letters: string; pass: boolean }>
@@ -210,6 +284,32 @@ export const FundraiseShapeSlice = createSlice({
         },
       };
     },
+
+    writeFundraiseShapeLnList: (
+      state,
+      { payload }: PayloadAction<TypesFundraiseShapeLnList[]>
+    ) => {
+      const lnlist = payload.sort((a, b) => (a.created < b.created ? 1 : -1));
+
+      state.value = {
+        ...state.value,
+        lnlist,
+      };
+    },
+
+    writeFundraiseShapeLnListAdd: (
+      state,
+      { payload }: PayloadAction<TypesFundraiseShapeLnList>
+    ) => {
+      const lnlist = [...state.value.lnlist, payload].sort((a, b) =>
+        a.created < b.created ? 1 : -1
+      );
+
+      state.value = {
+        ...state.value,
+        lnlist,
+      };
+    },
   },
 });
 
@@ -222,16 +322,24 @@ export const {
   //
   // shape library FundraiseShape
   //
+  initFundraiseShapeBundles,
+
   writeFundraiseShapeMoneyKind,
   writeFundraiseShapeLnInvoice,
 
   writeFundraiseShapeBundlesInvoiceAmount,
+  writeFundraiseShapeBundlesInvoiceFrom,
   writeFundraiseShapeBundlesInvoiceNote,
 
   writeFundraiseShapeLnVerify,
-  writeFundraiseShapeLnVerifyAttempts,
+  writeFundraiseShapeLnVerifyPrevious,
+  writeFundraiseShapeLnVerifyAttemptsInc,
+  writeFundraiseShapeLnVerifyAttemptsInit,
   writeFundraiseShapeLnVerifyTime,
   writeFundraiseShapeLnVerifyEntracte,
+  writeFundraiseShapeLnList,
+  writeFundraiseShapeLnListAdd,
+  writeFundraiseShapeLnAmount,
 } = FundraiseShapeSlice.actions;
 
 export const ofFundraiseShape = (

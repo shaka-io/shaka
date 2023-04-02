@@ -1,4 +1,5 @@
 import { ShakaFundraiseFormAmount } from "@shaka-web-features/fundraise/form/amount/ShakaFundraiseFormAmount";
+import { ShakaFundraiseFormFrom } from "@shaka-web-features/fundraise/form/from/ShakaFundraiseFormFrom";
 import { ShakaFundraiseFormGenerate } from "@shaka-web-features/fundraise/form/generate/ShakaFundraiseFormGenerate";
 import { ShakaFundraiseFormLightningQr } from "@shaka-web-features/fundraise/form/lightning-qr/ShakaFundraiseFormLightningQr";
 import { ShakaFundraiseFormMoney } from "@shaka-web-features/fundraise/form/money/ShakaFundraiseFormMoney";
@@ -27,10 +28,11 @@ export const ShakaFundraiseForm: React.FC<TypesShakaFundraiseForm> = ({
       >
         <ShakaFundraiseFormAmount basis={{ ...basis }} />
         <ShakaFundraiseFormMoney basis={{ ...basis }} />
+        <ShakaFundraiseFormFrom basis={{ ...basis }} />
         <ShakaFundraiseFormNote basis={{ ...basis }} />
         <ShakaFundraiseFormGenerate basis={{ ...basis }} />
         <ShakaFundraiseFormLightningQr basis={{ ...basis }} />
-        {!FundraiseShape.lndata ? (
+        {!FundraiseShape.lndata || FundraiseShape.lnverifyprevious ? (
           <div className={`flex h-36`}>
             {FundraiseShape.lnverifyprevious ? (
               <div
@@ -77,13 +79,6 @@ export const ShakaFundraiseForm: React.FC<TypesShakaFundraiseForm> = ({
                       clipRule={"evenodd"}
                     />
                   </svg>
-                </div>
-                <div className={`flex `}>
-                  <p
-                    className={`font-apercu font-medium text-base text-accent-focus font-bold `}
-                  >
-                    {`${t(`glossary:`, ``)}`}
-                  </p>
                 </div>
               </div>
             )}

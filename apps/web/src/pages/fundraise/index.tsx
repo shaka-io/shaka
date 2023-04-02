@@ -1,6 +1,10 @@
 import { ShakaFundraiseOrigin } from "@shaka-web-features/fundraise/ShakaFundraiseOrigin";
 import { useLocale } from "@shaka-web-hooks/use-locale";
-import { useShakaGraph0000Query } from "@shaka-web-library/graph/hooks";
+import {
+  useShakaGraph0000Query,
+  useShakaGraph0003Query,
+} from "@shaka-web-library/graph/hooks";
+import { writeFundraiseShapeLnList } from "@shaka-web-shapes/fundraise/FundraiseShape";
 import { useFold, useShape } from "@shaka-web-shapes/hooks";
 import {
   ofRootShape,
@@ -52,6 +56,42 @@ const ShakaPagesFundraise: NextPage = () => {
     // end
     return;
   }, [fold, g0000d?.ShakaGraph0000.pass, g0000e, g0000l]);
+
+  const {
+    data: g0003d,
+    // loading: g0003l,
+    // error: g0003e,
+  } = useShakaGraph0003Query({
+    variables: {
+      figure: {
+        locale,
+      },
+    },
+  });
+
+  React.useEffect(() => {
+    //
+    // @notes:
+
+    if (g0003d?.ShakaGraph0003.data?.list?.length) {
+      fold(
+        writeFundraiseShapeLnList(
+          g0003d.ShakaGraph0003.data.list.map(
+            ({ created, key, name, note, amount }) => ({
+              created,
+              key,
+              name,
+              note,
+              amount,
+            })
+          )
+        )
+      );
+    }
+
+    // end
+    return;
+  }, [fold, g0003d?.ShakaGraph0003.data?.list]);
 
   React.useEffect(() => {
     //

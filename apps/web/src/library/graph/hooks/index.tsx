@@ -22,6 +22,30 @@ export type Scalars = {
   Float: number;
 };
 
+export type LnCrowdfund = {
+  __typename?: "LnCrowdfund";
+  amount: Scalars["String"];
+  created: Scalars["String"];
+  id: Scalars["Int"];
+  key: Scalars["String"];
+  name?: Maybe<Scalars["String"]>;
+  note?: Maybe<Scalars["String"]>;
+  records?: Maybe<ModelsRecords>;
+  updated: Scalars["String"];
+};
+
+export type ModelsNotes = {
+  __typename?: "ModelsNotes";
+  date: Scalars["String"];
+  key: Scalars["String"];
+  list: Array<Scalars["String"]>;
+};
+
+export type ModelsRecords = {
+  __typename?: "ModelsRecords";
+  notes?: Maybe<Array<ModelsNotes>>;
+};
+
 export type Mutation = {
   __typename?: "Mutation";
   ShakaGraph0001: ShakaGraphResolve0001;
@@ -49,11 +73,16 @@ export type MutationShakaGraphLnInvoiceCreateArgs = {
 export type Query = {
   __typename?: "Query";
   ShakaGraph0000: ShakaGraphResolve0000;
+  ShakaGraph0003: ShakaGraphResolve0003;
   ShakaGraphLnInfo: ShakaGraphResolveLnInfo;
 };
 
 export type QueryShakaGraph0000Args = {
   figure: ShakaGraphFigures0000;
+};
+
+export type QueryShakaGraph0003Args = {
+  figure: ShakaGraphFigures0003;
 };
 
 export type QueryShakaGraphLnInfoArgs = {
@@ -72,6 +101,12 @@ export type ShakaGraphData0001 = {
 
 export type ShakaGraphData0002 = {
   __typename?: "ShakaGraphData0002";
+  notes?: Maybe<Array<Scalars["String"]>>;
+};
+
+export type ShakaGraphData0003 = {
+  __typename?: "ShakaGraphData0003";
+  list?: Maybe<Array<LnCrowdfund>>;
   notes?: Maybe<Array<Scalars["String"]>>;
 };
 
@@ -112,6 +147,10 @@ export type ShakaGraphFigures0002 = {
   note?: InputMaybe<Scalars["String"]>;
 };
 
+export type ShakaGraphFigures0003 = {
+  locale: Scalars["String"];
+};
+
 export type ShakaGraphFiguresLnInfo = {
   locale: Scalars["String"];
 };
@@ -149,6 +188,16 @@ export type ShakaGraphResolve0001 = {
 export type ShakaGraphResolve0002 = {
   __typename?: "ShakaGraphResolve0002";
   data?: Maybe<ShakaGraphData0002>;
+  hash: Scalars["String"];
+  message?: Maybe<Scalars["String"]>;
+  pass: Scalars["Boolean"];
+  ray: Scalars["String"];
+  timestamp: Scalars["Float"];
+};
+
+export type ShakaGraphResolve0003 = {
+  __typename?: "ShakaGraphResolve0003";
+  data?: Maybe<ShakaGraphData0003>;
   hash: Scalars["String"];
   message?: Maybe<Scalars["String"]>;
   pass: Scalars["Boolean"];
@@ -302,6 +351,34 @@ export type ShakaGraph0002Mutation = {
     data?: {
       __typename?: "ShakaGraphData0002";
       notes?: Array<string> | null;
+    } | null;
+  };
+};
+
+export type ShakaGraph0003QueryVariables = Exact<{
+  figure: ShakaGraphFigures0003;
+}>;
+
+export type ShakaGraph0003Query = {
+  __typename?: "Query";
+  ShakaGraph0003: {
+    __typename?: "ShakaGraphResolve0003";
+    pass: boolean;
+    message?: string | null;
+    timestamp: number;
+    hash: string;
+    ray: string;
+    data?: {
+      __typename?: "ShakaGraphData0003";
+      notes?: Array<string> | null;
+      list?: Array<{
+        __typename?: "LnCrowdfund";
+        created: string;
+        key: string;
+        name?: string | null;
+        note?: string | null;
+        amount: string;
+      }> | null;
     } | null;
   };
 };
@@ -669,4 +746,76 @@ export type ShakaGraph0002MutationResult =
 export type ShakaGraph0002MutationOptions = Apollo.BaseMutationOptions<
   ShakaGraph0002Mutation,
   ShakaGraph0002MutationVariables
+>;
+export const ShakaGraph0003Document = gql`
+  query ShakaGraph0003($figure: ShakaGraphFigures0003!) {
+    ShakaGraph0003(figure: $figure) {
+      pass
+      message
+      timestamp
+      hash
+      ray
+      data {
+        notes
+        list {
+          created
+          key
+          name
+          note
+          amount
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useShakaGraph0003Query__
+ *
+ * To run a query within a React component, call `useShakaGraph0003Query` and pass it any options that fit your needs.
+ * When your component renders, `useShakaGraph0003Query` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useShakaGraph0003Query({
+ *   variables: {
+ *      figure: // value for 'figure'
+ *   },
+ * });
+ */
+export function useShakaGraph0003Query(
+  baseOptions: Apollo.QueryHookOptions<
+    ShakaGraph0003Query,
+    ShakaGraph0003QueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<ShakaGraph0003Query, ShakaGraph0003QueryVariables>(
+    ShakaGraph0003Document,
+    options
+  );
+}
+export function useShakaGraph0003LazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    ShakaGraph0003Query,
+    ShakaGraph0003QueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<ShakaGraph0003Query, ShakaGraph0003QueryVariables>(
+    ShakaGraph0003Document,
+    options
+  );
+}
+export type ShakaGraph0003QueryHookResult = ReturnType<
+  typeof useShakaGraph0003Query
+>;
+export type ShakaGraph0003LazyQueryHookResult = ReturnType<
+  typeof useShakaGraph0003LazyQuery
+>;
+export type ShakaGraph0003QueryResult = Apollo.QueryResult<
+  ShakaGraph0003Query,
+  ShakaGraph0003QueryVariables
 >;

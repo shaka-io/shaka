@@ -7,6 +7,7 @@ import {
   writeFundraiseShapeEntracteTrue,
   writeFundraiseShapeInverseFalse,
   writeFundraiseShapeInverseTrue,
+  writeFundraiseShapeLnAmount,
   writeFundraiseShapeLnInvoice,
 } from "@shaka-web-shapes/fundraise/FundraiseShape";
 import { useFold, useShape } from "@shaka-web-shapes/hooks";
@@ -64,14 +65,16 @@ export const ShakaFundraiseFormGenerate: React.FC<
         // start
 
         const baseamount = FundraiseShape.moneykind === `fiat` ? `10` : `40000`;
+        const invoiceamount =
+          FundraiseShape.bundles.InvoiceAmount.letters || baseamount;
 
         const { data } = await lnInvoiceCreate({
           variables: {
             figure: {
               locale,
-              satoshis: `${FundraiseShape.moneykind === `fiat` ? `$` : ``}${
-                FundraiseShape.bundles.InvoiceAmount.letters || baseamount
-              }`,
+              satoshis: `${
+                FundraiseShape.moneykind === `fiat` ? `$` : ``
+              }${invoiceamount}`,
             },
           },
         });
@@ -82,6 +85,13 @@ export const ShakaFundraiseFormGenerate: React.FC<
           data.ShakaGraphLnInvoiceCreate.data?.ln &&
           data.ShakaGraphLnInvoiceCreate.data?.hash
         ) {
+          fold(
+            writeFundraiseShapeLnAmount(
+              `${
+                FundraiseShape.moneykind === `btc` ? `₿ sat` : `$`
+              } ${invoiceamount}`
+            )
+          );
           fold(
             writeFundraiseShapeLnInvoice([
               data.ShakaGraphLnInvoiceCreate.data.ln,

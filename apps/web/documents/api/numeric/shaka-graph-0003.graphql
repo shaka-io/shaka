@@ -1,0 +1,19 @@
+query ShakaGraph0003($figure: ShakaGraphFigures0003!) {
+  ShakaGraph0003(figure: $figure) {
+    pass
+    message
+    timestamp
+    hash
+    ray
+    data {
+      notes
+      list {
+        created
+        key
+        name
+        note
+        amount
+      }
+    }
+  }
+}
