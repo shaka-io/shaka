@@ -37,12 +37,12 @@ export const ShakaContactFormContent: React.FC<
   return (
     <>
       <div
-        className={`flex flex-row w-full rounded-lg h-48 bg-secondary opacity-90 items-start justify-center pl-2 py-2`}
+        className={`flex flex-row w-full rounded-lg h-48 bg-secondary opacity-80 items-start justify-center px-2 py-2`}
       >
         <textarea
-          placeholder={` ${t(`glossary:`, `Question`)}`} // @todo
+          placeholder={`${t(`glossary:question`, `question`)}`.toUpperCase()}
           value={ContactShape.bundles.ContactContent.letters}
-          className={`textarea textarea-ghost w-full h-full font-apercu font-medium text-white focus:text-white text-lg placeholder:text-white accent-blue-400 caret-pink-300 focus:bg-transparent focus:outline-0`}
+          className={`textarea textarea-ghost w-full h-full bg-shaka-secondary_relief focus:bg-shaka-secondary_relief font-apercu font-bold text-secondary-focus text-opacity-70 focus:text-secondary-focus text-sm pl-4 placeholder:text-secondary-content placeholder:text-opacity-50 accent-blue-400 caret-pink-300 focus:bg-transparent focus:outline-0 focus:text-opacity-100 opacity-70`}
           onChange={({ target: { value } }) =>
             lcShakaContactFormContentInput(value)
           }

@@ -34,7 +34,6 @@ export const ShakaFundraiseFormLightningQr: React.FC<
 
   const FundraiseShape = useShape(ofFundraiseShape);
 
-  console.log(JSON.stringify(FundraiseShape, null, 4), `FundraiseShape`);
   const locale = useLocale();
   const [lnInvoiceConfirm] = useShakaGraphLnInvoiceConfirmMutation();
   const [graph0002] = useShakaGraph0002Mutation();
