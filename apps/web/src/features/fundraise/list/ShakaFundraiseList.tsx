@@ -32,7 +32,7 @@ export const ShakaFundraiseList: React.FC<TypesShakaFundraiseList> = ({
           </p>
         </div>
 
-        <div className={`flex flex-col w-full space-y-3`}>
+        <div className={`flex flex-col w-full space-y-3 lg:px-72`}>
           {FundraiseShape.lnlist
             ? FundraiseShape.lnlist.map((lni) => {
                 return (

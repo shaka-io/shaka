@@ -46,6 +46,8 @@ export type TypesFundraiseShapeValue = {
   bundles: TypesContactShapeBundles;
 
   lnlist: TypesFundraiseShapeLnList[];
+
+  toastvisible: boolean;
 };
 
 export type TypesFundraiseShape = {
@@ -79,6 +81,8 @@ const initialState: TypesFundraiseShape = {
     },
 
     lnlist: [],
+
+    toastvisible: false,
   },
 };
 
@@ -310,6 +314,16 @@ export const FundraiseShapeSlice = createSlice({
         lnlist,
       };
     },
+
+    writeFundraiseShapeToastVisible: (
+      state,
+      { payload }: PayloadAction<boolean>
+    ) => {
+      state.value = {
+        ...state.value,
+        toastvisible: payload,
+      };
+    },
   },
 });
 
@@ -340,6 +354,7 @@ export const {
   writeFundraiseShapeLnList,
   writeFundraiseShapeLnListAdd,
   writeFundraiseShapeLnAmount,
+  writeFundraiseShapeToastVisible,
 } = FundraiseShapeSlice.actions;
 
 export const ofFundraiseShape = (

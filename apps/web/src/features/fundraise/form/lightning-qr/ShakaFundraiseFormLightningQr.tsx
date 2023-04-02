@@ -14,6 +14,7 @@ import {
   writeFundraiseShapeLnVerifyEntracte,
   writeFundraiseShapeLnVerifyPrevious,
   writeFundraiseShapeLnVerifyTime,
+  writeFundraiseShapeToastVisible,
 } from "@shaka-web-shapes/fundraise/FundraiseShape";
 import { useFold, useShape } from "@shaka-web-shapes/hooks";
 import { TypesShakaBasis } from "@shaka-web-types/basis/TypesShakaBasis";
@@ -37,6 +38,61 @@ export const ShakaFundraiseFormLightningQr: React.FC<
   const locale = useLocale();
   const [lnInvoiceConfirm] = useShakaGraphLnInvoiceConfirmMutation();
   const [graph0002] = useShakaGraph0002Mutation();
+
+  const { reset: toastreset } = useElapsedTime({
+    isPlaying: FundraiseShape.toastvisible,
+    duration: 3,
+    onComplete: () => {
+      fold(writeFundraiseShapeToastVisible(false));
+    },
+  });
+
+  const lcaShakaFundraiseFormLightningQrCopyLnUrl =
+    React.useCallback(async () => {
+      //
+      // @notes:
+
+      //
+      // conditions
+
+      toastreset(0);
+
+      // error false
+      // fold()
+
+      // loading start
+      // fold()
+
+      fold(writeFundraiseShapeToastVisible(true));
+
+      //
+      // run
+      const run = async () => {
+        try {
+          //
+          // start
+
+          await navigator.clipboard.writeText(FundraiseShape.lndata);
+
+          //
+          // end
+        } catch (e) {
+          //
+          // catch
+        } finally {
+          //
+          // loading stop
+          // fold()
+          //
+          // end
+        }
+      };
+      run();
+
+      //
+      // end
+      return;
+    }, [FundraiseShape.lndata, fold, toastreset]);
 
   const lcaShakaFundraiseFormLightningQrOnPaymentVerified =
     React.useCallback(() => {
@@ -232,6 +288,31 @@ export const ShakaFundraiseFormLightningQr: React.FC<
                 }}
               />
             </div>
+            <div
+              className={`flex flex-row w-full px-8 items-center space-x-2 cursor-pointer`}
+              onClick={lcaShakaFundraiseFormLightningQrCopyLnUrl}
+            >
+              <div className={`flex text-accent-focus opacity-80`}>
+                <svg
+                  xmlns={"http://www.w3.org/2000/svg"}
+                  viewBox={"0 0 24 24"}
+                  fill={"currentColor"}
+                  className={"w-4 h-4"}
+                >
+                  <path
+                    d={
+                      "M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z"
+                    }
+                  />
+                </svg>
+              </div>
+
+              <p
+                className={`font-apercu font-medium text-base text-accent-focus font-bold truncate`}
+              >
+                {FundraiseShape.lndata}
+              </p>
+            </div>
 
             <div
               className={`flex flex-row rounded w-full h-12 bg-accent opacity-80 items-center justify-between space-x-3 px-2`}
@@ -305,6 +386,48 @@ export const ShakaFundraiseFormLightningQr: React.FC<
                 </p>
               </div>
             ) : null}
+          </div>
+        </>
+      ) : null}
+
+      {FundraiseShape.toastvisible ? (
+        <>
+          <div className={"toast toast-center"}>
+            <div className={"alert bg-shaka-accent_relief"}>
+              <div className={"flex flex-row px-3 space-x-3"}>
+                <div className={`flex text-accent-content`}>
+                  <svg
+                    xmlns={"http://www.w3.org/2000/svg"}
+                    viewBox={"0 0 24 24"}
+                    fill={"currentColor"}
+                    className={"w-4 h-4"}
+                  >
+                    <path
+                      fillRule={"evenodd"}
+                      d={
+                        "M7.502 6h7.128A3.375 3.375 0 0118 9.375v9.375a3 3 0 003-3V6.108c0-1.505-1.125-2.811-2.664-2.94a48.972 48.972 0 00-.673-.05A3 3 0 0015 1.5h-1.5a3 3 0 00-2.663 1.618c-.225.015-.45.032-.673.05C8.662 3.295 7.554 4.542 7.502 6zM13.5 3A1.5 1.5 0 0012 4.5h4.5A1.5 1.5 0 0015 3h-1.5z"
+                      }
+                      clipRule={"evenodd"}
+                    />
+                    <path
+                      fillRule={"evenodd"}
+                      d={
+                        "M3 9.375C3 8.339 3.84 7.5 4.875 7.5h9.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 013 20.625V9.375zm9.586 4.594a.75.75 0 00-1.172-.938l-2.476 3.096-.908-.907a.75.75 0 00-1.06 1.06l1.5 1.5a.75.75 0 001.116-.062l3-3.75z"
+                      }
+                      clipRule={"evenodd"}
+                    />
+                  </svg>
+                </div>
+                <p
+                  className={`font-apercu font-medium text-base text-accent-focus font-bold `}
+                >
+                  {`${t(
+                    `glossary:lightning_address_copied`,
+                    `lightning_address_copied`
+                  )}`}
+                </p>
+              </div>
+            </div>
           </div>
         </>
       ) : null}
