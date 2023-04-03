@@ -1,0 +1,14 @@
+query ShakaGraphTeamSessionValidation(
+  $figure: ShakaGraphFiguresTeamSessionValidation!
+) {
+  ShakaGraphTeamSessionValidation(figure: $figure) {
+    pass
+    message
+    timestamp
+    hash
+    ray
+    data {
+      notes
+    }
+  }
+}

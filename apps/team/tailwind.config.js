@@ -48,7 +48,7 @@ const shakacolors = {
     relief: "#FFAE9D",
   },
   secondary: {
-    relief: "#FEFDFE",
+    relief: "#EFE8F3",
   },
   accent: {
     relief: `#FFF2C8`,

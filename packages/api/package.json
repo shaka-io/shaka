@@ -75,6 +75,7 @@
     "express-session": "^1.17.3",
     "graphql": "^16.6.0",
     "ioredis": "^5.3.1",
+    "n-digit-token": "^2.2.0",
     "nostr-tools": "^1.7.4",
     "pg": "^8.9.0",
     "type-graphql": "2.0.0-beta.1",

@@ -1,0 +1,13 @@
+mutation ShakaGraphTeamLoginAttempt(
+  $figure: ShakaGraphFiguresTeamLoginAttempt!
+) {
+  ShakaGraphTeamLoginAttempt(figure: $figure) {
+    pass
+    message
+    timestamp
+    hash
+    data {
+      notes
+    }
+  }
+}

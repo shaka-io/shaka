@@ -4,11 +4,14 @@ import { SeederOptions } from "typeorm-extension";
 import { Email } from "../email/Email";
 import { LnCrowdfund } from "../ln-crowdfund/LnCrowdfund";
 import { Question } from "../question/Question";
+import { Team } from "../team/Team";
 import { envmodels } from "../_env";
 import { Shaka1680109864603 } from "./migrations/1680109864603-Shaka";
 import { Shaka1680116671524 } from "./migrations/1680116671524-Shaka";
 import { Shaka1680304799523 } from "./migrations/1680304799523-Shaka";
 import { Shaka1680305040854 } from "./migrations/1680305040854-Shaka";
+import { Shaka1680492409366 } from "./migrations/1680492409366-Shaka";
+import { Shaka1680492737954 } from "./migrations/1680492737954-Shaka";
 
 const { PROD, ENV } = env;
 const { MODELS_DB } = envmodels;
@@ -21,7 +24,7 @@ const options: DataSourceOptions & SeederOptions = {
   synchronize: false,
   logging: !PROD,
   dropSchema: false,
-  entities: [Email, Question, LnCrowdfund],
+  entities: [Email, Question, LnCrowdfund, Team],
   subscribers: [],
   migrationsTableName: "history",
   migrationsRun: true,
@@ -30,6 +33,8 @@ const options: DataSourceOptions & SeederOptions = {
     Shaka1680116671524,
     Shaka1680304799523,
     Shaka1680305040854,
+    Shaka1680492409366,
+    Shaka1680492737954,
   ],
   seeds: [],
 };

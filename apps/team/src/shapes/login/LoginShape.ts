@@ -6,8 +6,11 @@ import { TypesLibraryBundles } from "@wavesrcool/library/lib/bundles/_types";
 const { bundles } = classsteamshaka;
 
 export type TypesLoginShapeBundles = {
-  LoginPrimary: TypesLibraryBundles;
+  PrimaryCredential: TypesLibraryBundles;
+  SecondaryPasscode: TypesLibraryBundles;
 };
+
+export type TypesLoginShapeView = "primary" | "secondary";
 
 export type TypesLoginShapeThread = "root";
 
@@ -18,6 +21,9 @@ export type TypesLoginShapeValue = {
   //
   // shape type map LoginShape
   //
+
+  view: TypesLoginShapeView;
+
   submitted: boolean;
   submittedTime: number;
   bundles: TypesLoginShapeBundles;
@@ -35,10 +41,12 @@ const initialState: TypesLoginShape = {
     //
     // shape initial LoginShape
     //
+    view: `primary`,
     submitted: false,
     submittedTime: 0,
     bundles: {
-      LoginPrimary: bundles.reference,
+      PrimaryCredential: bundles.reference,
+      SecondaryPasscode: bundles.reference,
     },
   },
 };
@@ -102,13 +110,23 @@ export const LoginShapeSlice = createSlice({
       };
     },
 
-    writeLoginShapeBundlesLoginPrimary: (
+    writeLoginShapeView: (
+      state,
+      { payload }: PayloadAction<TypesLoginShapeView>
+    ) => {
+      state.value = {
+        ...state.value,
+        view: payload,
+      };
+    },
+
+    writeLoginShapeBundlesPrimaryCredential: (
       state,
       action: PayloadAction<{ letters: string; pass: boolean }>
     ) => {
       const { letters, pass } = action.payload;
-      const LoginPrimary = bundles.cyclic.letters({
-        bundle: state.value.bundles.LoginPrimary,
+      const PrimaryCredential = bundles.cyclic.letters({
+        bundle: state.value.bundles.PrimaryCredential,
         letters,
         pass,
       });
@@ -117,7 +135,27 @@ export const LoginShapeSlice = createSlice({
         ...state.value,
         bundles: {
           ...state.value.bundles,
-          LoginPrimary,
+          PrimaryCredential,
+        },
+      };
+    },
+
+    writeLoginShapeBundlesSecondaryPasscode: (
+      state,
+      action: PayloadAction<{ letters: string; pass: boolean }>
+    ) => {
+      const { letters, pass } = action.payload;
+      const SecondaryPasscode = bundles.cyclic.letters({
+        bundle: state.value.bundles.SecondaryPasscode,
+        letters,
+        pass,
+      });
+
+      state.value = {
+        ...state.value,
+        bundles: {
+          ...state.value.bundles,
+          SecondaryPasscode,
         },
       };
     },
@@ -136,8 +174,9 @@ export const {
 
   writeLoginShapeSubmitted,
   writeLoginShapeSubmittedTime,
-
-  writeLoginShapeBundlesLoginPrimary,
+  writeLoginShapeView,
+  writeLoginShapeBundlesPrimaryCredential,
+  writeLoginShapeBundlesSecondaryPasscode,
 } = LoginShapeSlice.actions;
 
 export const ofLoginShape = (state: TypesShakaShape): TypesLoginShapeValue =>

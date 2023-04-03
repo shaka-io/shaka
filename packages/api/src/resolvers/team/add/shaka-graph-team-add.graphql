@@ -1,0 +1,11 @@
+mutation ShakaGraphTeamAdd($figure: ShakaGraphFiguresTeamAdd!) {
+  ShakaGraphTeamAdd(figure: $figure) {
+    pass
+    message
+    timestamp
+    hash
+    data {
+      notes
+    }
+  }
+}

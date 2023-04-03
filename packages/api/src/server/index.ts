@@ -20,6 +20,11 @@ import { ShakaGraph0000 } from "../resolvers/numeric/0000/shaka-graph-0000-resol
 import { ShakaGraph0001 } from "../resolvers/numeric/0001/shaka-graph-0001-resolver";
 import { ShakaGraph0002 } from "../resolvers/numeric/0002/shaka-graph-0002-resolver";
 import { ShakaGraph0003 } from "../resolvers/numeric/0003/shaka-graph-0003-resolver";
+import { ShakaGraphTeamAdd } from "../resolvers/team/add/shaka-graph-team-add-resolver";
+import { ShakaGraphTeamLoginAttempt } from "../resolvers/team/login-attempt/shaka-graph-team-login-attempt-resolver";
+import { ShakaGraphTeamLoginConfirm } from "../resolvers/team/login-confirm/shaka-graph-team-login-confirm-resolver";
+import { ShakaGraphTeamSessionHydrate } from "../resolvers/team/session-hydrate/shaka-graph-team-session-hydrate-resolver";
+import { ShakaGraphTeamSessionValidation } from "../resolvers/team/session-validation/shaka-graph-team-session-validation-resolver";
 import { envapi } from "../_env";
 import { TypesServerContext } from "./types";
 
@@ -47,6 +52,11 @@ export const server = async (
         ShakaGraphLnInfo,
         ShakaGraphLnInvoiceCreate,
         ShakaGraphLnInvoiceConfirm,
+        ShakaGraphTeamAdd,
+        ShakaGraphTeamLoginAttempt,
+        ShakaGraphTeamLoginConfirm,
+        ShakaGraphTeamSessionHydrate,
+        ShakaGraphTeamSessionValidation,
       ],
       scalarsMap: [],
       validate: false,

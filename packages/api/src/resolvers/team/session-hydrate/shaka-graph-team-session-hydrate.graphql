@@ -1,0 +1,32 @@
+query ShakaGraphTeamSessionHydrate(
+  $figure: ShakaGraphFiguresTeamSessionHydrate!
+) {
+  ShakaGraphTeamSessionHydrate(figure: $figure) {
+    pass
+    message
+    timestamp
+    hash
+    ray
+    data {
+      notes
+      read {
+        created
+        key
+        credential
+      }
+      emails {
+        created
+        key
+        address
+        records {
+          recipient
+          sender
+          subject
+          date
+          from
+          text
+        }
+      }
+    }
+  }
+}
