@@ -26,7 +26,6 @@ import { ShakaGraphTeamLoginAttempt } from "../resolvers/team/login-attempt/shak
 import { ShakaGraphTeamLoginConfirm } from "../resolvers/team/login-confirm/shaka-graph-team-login-confirm-resolver";
 import { ShakaGraphTeamMailReply } from "../resolvers/team/mail-reply/shaka-graph-team-mail-reply-resolver";
 import { ShakaGraphTeamSessionHydrate } from "../resolvers/team/session-hydrate/shaka-graph-team-session-hydrate-resolver";
-import { ShakaGraphTeamSessionValidation } from "../resolvers/team/session-validation/shaka-graph-team-session-validation-resolver";
 import { TypesServerContext } from "./types";
 
 const { PROD, ENV } = env;
@@ -57,7 +56,6 @@ export const server = async (
         ShakaGraphTeamLoginAttempt,
         ShakaGraphTeamLoginConfirm,
         ShakaGraphTeamSessionHydrate,
-        ShakaGraphTeamSessionValidation,
         ShakaGraphTeamMailReply,
       ],
       scalarsMap: [],

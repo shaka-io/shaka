@@ -1,3 +1,4 @@
+import { LibraryUniques } from "@shaka-js/library/lib/uniques/LibraryUniques";
 import { Team } from "@shaka-js/models/lib/team/Team";
 import { TypesServerContext } from "../../../server/types";
 import { ShakaGraphDataTeamLoginConfirm } from "./shaka-graph-team-login-confirm-data";
@@ -35,8 +36,11 @@ export const ShakaGraphEvaluateTeamLoginConfirm = async (
 
     await ctx.redis.del(`team-login::${passcode}`);
 
+    const sessionid = LibraryUniques();
+    await ctx.redis.set(`team-session::${sessionid}`, read.credential);
+
     // eslint-disable-next-line no-param-reassign
-    ctx.req.session.key1 = read.key;
+    // ctx.req.session.key1 = read.key;
 
     message = `complete`;
 
@@ -46,6 +50,7 @@ export const ShakaGraphEvaluateTeamLoginConfirm = async (
     //
     const data: ShakaGraphDataTeamLoginConfirm = {
       notes: [`TeamLoginConfirm`],
+      session: sessionid,
     };
 
     return handler.solve<{ data: ShakaGraphDataTeamLoginConfirm }>({ data });

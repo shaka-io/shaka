@@ -4,4 +4,7 @@ import { Field, ObjectType } from "type-graphql";
 export class ShakaGraphDataTeamLoginConfirm {
   @Field(() => [String], { nullable: true })
   notes?: string[] | null;
+
+  @Field(() => String, { nullable: true })
+  session?: string | null;
 }

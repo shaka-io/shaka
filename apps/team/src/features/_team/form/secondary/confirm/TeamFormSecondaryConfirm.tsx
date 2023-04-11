@@ -60,10 +60,13 @@ export const TeamFormSecondaryConfirm: React.FC<
           },
         });
 
-        if (graphTeamLoginConfirmd?.ShakaGraphTeamLoginConfirm.pass) {
+        if (
+          graphTeamLoginConfirmd?.ShakaGraphTeamLoginConfirm.pass &&
+          graphTeamLoginConfirmd?.ShakaGraphTeamLoginConfirm.data?.session
+        ) {
           fold(initLoginShape());
           await router.push(
-            `/session/${LoginShape.bundles.PrimaryCredential.letters}`
+            `/session/${graphTeamLoginConfirmd?.ShakaGraphTeamLoginConfirm.data?.session}`
           );
         }
 

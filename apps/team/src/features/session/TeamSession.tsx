@@ -40,6 +40,7 @@ export const TeamSession: React.FC<TypesTeamSession> = ({
     variables: {
       figure: {
         locale,
+        session: router.asPath.split(`/`).pop() || ``,
       },
     },
   });

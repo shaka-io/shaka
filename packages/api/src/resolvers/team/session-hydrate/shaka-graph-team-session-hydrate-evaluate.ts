@@ -20,14 +20,18 @@ export const ShakaGraphEvaluateTeamSessionHydrate = async (
     // evaluate TeamSessionHydrate
     //
 
-    if (!ctx.req.session.key1) {
-      message = `!-key1`;
+    const { session } = figure;
+
+    const credential = await ctx.redis.get(`team-session::${session}`);
+
+    if (!credential) {
+      message = `!-credential`;
       return handler.error<string>(message);
     }
 
     const read = await ctx.models
       .createQueryBuilder(Team, "team")
-      .where("team.key = :key", { key: ctx.req.session.key1 })
+      .where("team.credential = :credential", { credential })
       .getOne();
 
     if (!read) {

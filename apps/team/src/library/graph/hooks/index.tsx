@@ -1,5 +1,5 @@
-import { gql } from "@apollo/client";
 import * as Apollo from "@apollo/client";
+import { gql } from "@apollo/client";
 
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -29,6 +29,7 @@ export type Email = {
   id: Scalars["Int"];
   key: Scalars["String"];
   records?: Maybe<EmailRecords>;
+  to: Scalars["String"];
   updated: Scalars["String"];
 };
 
@@ -118,7 +119,6 @@ export type Query = {
   ShakaGraph0003: ShakaGraphResolve0003;
   ShakaGraphLnInfo: ShakaGraphResolveLnInfo;
   ShakaGraphTeamSessionHydrate: ShakaGraphResolveTeamSessionHydrate;
-  ShakaGraphTeamSessionValidation: ShakaGraphResolveTeamSessionValidation;
 };
 
 export type QueryShakaGraph0000Args = {
@@ -135,10 +135,6 @@ export type QueryShakaGraphLnInfoArgs = {
 
 export type QueryShakaGraphTeamSessionHydrateArgs = {
   figure: ShakaGraphFiguresTeamSessionHydrate;
-};
-
-export type QueryShakaGraphTeamSessionValidationArgs = {
-  figure: ShakaGraphFiguresTeamSessionValidation;
 };
 
 export type ShakaGraphData0000 = {
@@ -195,6 +191,7 @@ export type ShakaGraphDataTeamLoginAttempt = {
 export type ShakaGraphDataTeamLoginConfirm = {
   __typename?: "ShakaGraphDataTeamLoginConfirm";
   notes?: Maybe<Array<Scalars["String"]>>;
+  session?: Maybe<Scalars["String"]>;
 };
 
 export type ShakaGraphDataTeamMailReply = {
@@ -207,11 +204,6 @@ export type ShakaGraphDataTeamSessionHydrate = {
   emails?: Maybe<Array<Email>>;
   notes?: Maybe<Array<Scalars["String"]>>;
   read?: Maybe<Team>;
-};
-
-export type ShakaGraphDataTeamSessionValidation = {
-  __typename?: "ShakaGraphDataTeamSessionValidation";
-  notes?: Maybe<Array<Scalars["String"]>>;
 };
 
 export type ShakaGraphFigures0000 = {
@@ -278,10 +270,7 @@ export type ShakaGraphFiguresTeamMailReply = {
 
 export type ShakaGraphFiguresTeamSessionHydrate = {
   locale: Scalars["String"];
-};
-
-export type ShakaGraphFiguresTeamSessionValidation = {
-  locale: Scalars["String"];
+  session: Scalars["String"];
 };
 
 export type ShakaGraphResolve0000 = {
@@ -404,16 +393,6 @@ export type ShakaGraphResolveTeamSessionHydrate = {
   timestamp: Scalars["Float"];
 };
 
-export type ShakaGraphResolveTeamSessionValidation = {
-  __typename?: "ShakaGraphResolveTeamSessionValidation";
-  data?: Maybe<ShakaGraphDataTeamSessionValidation>;
-  hash: Scalars["String"];
-  message?: Maybe<Scalars["String"]>;
-  pass: Scalars["Boolean"];
-  ray: Scalars["String"];
-  timestamp: Scalars["Float"];
-};
-
 export type Team = {
   __typename?: "Team";
   created: Scalars["String"];
@@ -483,6 +462,7 @@ export type ShakaGraphTeamLoginConfirmMutation = {
     data?: {
       __typename?: "ShakaGraphDataTeamLoginConfirm";
       notes?: Array<string> | null;
+      session?: string | null;
     } | null;
   };
 };
@@ -543,26 +523,6 @@ export type ShakaGraphTeamSessionHydrateQuery = {
           text: string;
         } | null;
       }> | null;
-    } | null;
-  };
-};
-
-export type ShakaGraphTeamSessionValidationQueryVariables = Exact<{
-  figure: ShakaGraphFiguresTeamSessionValidation;
-}>;
-
-export type ShakaGraphTeamSessionValidationQuery = {
-  __typename?: "Query";
-  ShakaGraphTeamSessionValidation: {
-    __typename?: "ShakaGraphResolveTeamSessionValidation";
-    pass: boolean;
-    message?: string | null;
-    timestamp: number;
-    hash: string;
-    ray: string;
-    data?: {
-      __typename?: "ShakaGraphDataTeamSessionValidation";
-      notes?: Array<string> | null;
     } | null;
   };
 };
@@ -701,6 +661,7 @@ export const ShakaGraphTeamLoginConfirmDocument = gql`
       hash
       data {
         notes
+        session
       }
     }
   }
@@ -889,71 +850,4 @@ export type ShakaGraphTeamSessionHydrateLazyQueryHookResult = ReturnType<
 export type ShakaGraphTeamSessionHydrateQueryResult = Apollo.QueryResult<
   ShakaGraphTeamSessionHydrateQuery,
   ShakaGraphTeamSessionHydrateQueryVariables
->;
-export const ShakaGraphTeamSessionValidationDocument = gql`
-  query ShakaGraphTeamSessionValidation(
-    $figure: ShakaGraphFiguresTeamSessionValidation!
-  ) {
-    ShakaGraphTeamSessionValidation(figure: $figure) {
-      pass
-      message
-      timestamp
-      hash
-      ray
-      data {
-        notes
-      }
-    }
-  }
-`;
-
-/**
- * __useShakaGraphTeamSessionValidationQuery__
- *
- * To run a query within a React component, call `useShakaGraphTeamSessionValidationQuery` and pass it any options that fit your needs.
- * When your component renders, `useShakaGraphTeamSessionValidationQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useShakaGraphTeamSessionValidationQuery({
- *   variables: {
- *      figure: // value for 'figure'
- *   },
- * });
- */
-export function useShakaGraphTeamSessionValidationQuery(
-  baseOptions: Apollo.QueryHookOptions<
-    ShakaGraphTeamSessionValidationQuery,
-    ShakaGraphTeamSessionValidationQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<
-    ShakaGraphTeamSessionValidationQuery,
-    ShakaGraphTeamSessionValidationQueryVariables
-  >(ShakaGraphTeamSessionValidationDocument, options);
-}
-export function useShakaGraphTeamSessionValidationLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    ShakaGraphTeamSessionValidationQuery,
-    ShakaGraphTeamSessionValidationQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<
-    ShakaGraphTeamSessionValidationQuery,
-    ShakaGraphTeamSessionValidationQueryVariables
-  >(ShakaGraphTeamSessionValidationDocument, options);
-}
-export type ShakaGraphTeamSessionValidationQueryHookResult = ReturnType<
-  typeof useShakaGraphTeamSessionValidationQuery
->;
-export type ShakaGraphTeamSessionValidationLazyQueryHookResult = ReturnType<
-  typeof useShakaGraphTeamSessionValidationLazyQuery
->;
-export type ShakaGraphTeamSessionValidationQueryResult = Apollo.QueryResult<
-  ShakaGraphTeamSessionValidationQuery,
-  ShakaGraphTeamSessionValidationQueryVariables
 >;

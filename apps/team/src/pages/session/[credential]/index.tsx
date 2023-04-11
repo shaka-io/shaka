@@ -1,16 +1,24 @@
 import { TeamSession } from "@shaka-team-features/session/TeamSession";
-import { useLocale } from "@shaka-team-hooks/use-locale";
-import { useShakaGraphTeamSessionValidationQuery } from "@shaka-team-library/graph/hooks";
+import { apollo } from "@shaka-team-library/apollo";
+import {
+  ShakaGraphTeamSessionHydrateDocument,
+  ShakaGraphTeamSessionHydrateQuery,
+  ShakaGraphTeamSessionHydrateQueryVariables,
+} from "@shaka-team-library/graph/hooks";
 import { useShape } from "@shaka-team-shapes/hooks";
 import { ofRootShape } from "@shaka-team-shapes/root/RootShape";
-import type { NextPage } from "next";
-import { useRouter } from "next/router";
+import type {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  NextPage,
+} from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import * as React from "react";
 import { configuration } from "../../../configuration";
 
 const {
   I18N: {
-    // CONFIG,
+    CONFIG,
     DICTIONARY: { BASIS },
   },
 } = configuration;
@@ -19,42 +27,6 @@ const dictionary = [...BASIS];
 
 const TeamPagesSession: NextPage = () => {
   const [mounted, setMounted] = React.useState<boolean>(false);
-
-  const locale = useLocale();
-  const router = useRouter();
-
-  const {
-    data: graphTeamSessionValidationd,
-    loading: graphTeamSessionValidationl,
-    error: graphTeamSessionValidatione,
-  } = useShakaGraphTeamSessionValidationQuery({
-    variables: {
-      figure: {
-        locale,
-      },
-    },
-  });
-
-  React.useEffect(() => {
-    //
-    // @notes:
-    if (
-      !graphTeamSessionValidationl &&
-      !graphTeamSessionValidatione &&
-      graphTeamSessionValidationd?.ShakaGraphTeamSessionValidation.pass ===
-        false
-    ) {
-      router.push(`/`);
-    }
-
-    // end
-    return;
-  }, [
-    graphTeamSessionValidationd?.ShakaGraphTeamSessionValidation.pass,
-    graphTeamSessionValidatione,
-    graphTeamSessionValidationl,
-    router,
-  ]);
 
   React.useEffect(() => {
     //
@@ -66,24 +38,59 @@ const TeamPagesSession: NextPage = () => {
 
   const RootShape = useShape(ofRootShape);
 
-  return mounted &&
-    !graphTeamSessionValidationl &&
-    !graphTeamSessionValidatione &&
-    graphTeamSessionValidationd?.ShakaGraphTeamSessionValidation.pass ? (
+  return mounted ? (
     <TeamSession basis={{ key: RootShape.basiskey, dictionary }} />
   ) : null;
 };
 
 export default TeamPagesSession;
 
-/*
-export const getStaticProps: GetStaticProps = async ({
-  locale = "en",
-}: GetStaticPropsContext) => {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, dictionary, CONFIG)),
-    },
-  };
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+  locale,
+}: GetServerSidePropsContext) => {
+  try {
+    if (!params) {
+      return { redirect: { destination: "/", permanent: false }, props: {} };
+    }
+
+    const { credential } = params;
+
+    if (typeof credential !== "string") {
+      return { redirect: { destination: "/", permanent: false }, props: {} };
+    }
+
+    const variables: ShakaGraphTeamSessionHydrateQueryVariables = {
+      figure: {
+        locale: locale || `en`,
+        session: credential,
+      },
+    };
+
+    const graphresp = await apollo().query<ShakaGraphTeamSessionHydrateQuery>({
+      query: ShakaGraphTeamSessionHydrateDocument,
+      variables,
+    });
+
+    if (!graphresp.data || !graphresp.data.ShakaGraphTeamSessionHydrate.pass) {
+      return { redirect: { destination: "/", permanent: false }, props: {} };
+    }
+
+    const { errors } = graphresp;
+
+    if (errors) {
+      return { redirect: { destination: "/", permanent: false }, props: {} };
+    }
+
+    const sp = {
+      props: {
+        ...(await serverSideTranslations(locale || `en`, dictionary, CONFIG)),
+      },
+    };
+
+    return sp;
+  } catch (e) {
+    console.log(e);
+    return { redirect: { destination: "/", permanent: false }, props: {} };
+  }
 };
-*/
