@@ -22,8 +22,6 @@ export const ShakaGraphEvaluateTeamLoginAttempt = async (
       .where("team.credential = :credential", { credential })
       .getOne();
 
-    console.log(JSON.stringify(read, null, 4), `read`);
-
     if (!read) {
       message = `!-read`;
       return handler.error<string>(message);
@@ -44,9 +42,7 @@ export const ShakaGraphEvaluateTeamLoginAttempt = async (
       subject: `Shaka Team | Confirm your login request`,
       text: `Hello${read.records ? ` (add name)` : ``},
       
-Confirm your login request with this pass code:
-
-* ${passcode}
+Confirm your login request with this pass code: ${passcode}
 
 Pura vida!
 

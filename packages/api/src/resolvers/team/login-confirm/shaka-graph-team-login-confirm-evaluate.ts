@@ -28,8 +28,6 @@ export const ShakaGraphEvaluateTeamLoginConfirm = async (
 
     const foundcredential = await ctx.redis.get(`team-login::${passcode}`);
 
-    console.log(JSON.stringify(foundcredential, null, 4), `foundcredential`);
-
     if (!(foundcredential === credential)) {
       message = `!-credential`;
       return handler.error<string>(message);
