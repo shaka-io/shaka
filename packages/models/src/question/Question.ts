@@ -46,6 +46,10 @@ export class Question extends BaseEntity {
   @Column({ type: `varchar` })
   content!: string;
 
+  @Field(() => String, { nullable: true })
+  @Column({ type: `varchar`, nullable: true })
+  opt!: string;
+
   //
   //
   // model records
