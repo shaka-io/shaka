@@ -43,7 +43,7 @@ export const ShakaGraphEvaluateTeamSessionHydrate = async (
 
     let emails: Email[] = [];
 
-    emails = reademails.filter((email) => email.address);
+    emails = reademails.filter((email) => email.address.toLowerCase() === ``);
 
     //
     //

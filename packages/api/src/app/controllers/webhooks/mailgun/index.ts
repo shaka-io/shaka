@@ -28,6 +28,7 @@ export const webhooksmailgun = async (
       .into(Email)
       .values({
         address,
+        to: records.recipient,
         records,
       })
       .returning([`id`])

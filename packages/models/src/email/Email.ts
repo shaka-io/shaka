@@ -39,6 +39,10 @@ export class Email extends BaseEntity {
   @Column({ type: `varchar` })
   address!: string;
 
+  @Field(() => String)
+  @Column({ type: `varchar` })
+  to!: string;
+
   //
   //
   // model records
