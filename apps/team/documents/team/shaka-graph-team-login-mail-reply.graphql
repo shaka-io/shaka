@@ -1,0 +1,11 @@
+mutation ShakaGraphTeamMailReply($figure: ShakaGraphFiguresTeamMailReply!) {
+  ShakaGraphTeamMailReply(figure: $figure) {
+    pass
+    message
+    timestamp
+    hash
+    data {
+      notes
+    }
+  }
+}

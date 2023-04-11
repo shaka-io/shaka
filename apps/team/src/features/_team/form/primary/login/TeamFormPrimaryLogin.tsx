@@ -89,10 +89,10 @@ export const TeamFormPrimaryLogin: React.FC<TypesTeamFormPrimaryLogin> = ({
   return (
     <>
       <div
-        className={`flex flex-row rounded-xl w-full h-12 bg-secondary items-center opacity-90 px-2`}
+        className={`flex flex-row rounded-xl w-full h-16 bg-secondary items-center opacity-90 px-2`}
       >
         <button
-          className={`btn btn-sm btn-secondary bg-shaka-secondary_relief flex-1 font-apercu text-opacity-50 focus:text-secondary-content hover:text-white opacity-80 ${
+          className={`btn btn-sm btn-secondary bg-shaka-secondary_relief flex-1 h-10 font-apercu text-opacity-50 focus:text-secondary-content hover:text-white opacity-80 ${
             LoginShape.entracte ? `loading` : ``
           }`}
           onClick={lcaTeamFormPrimaryLoginSubmit}

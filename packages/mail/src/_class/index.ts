@@ -47,7 +47,7 @@ export class MailClass {
 
       const message: MailgunMessageData = {
         to,
-        from: `Shaka <${frompref}@${MAIL_BASE}>`,
+        from: `Shaka Team <${frompref}@${MAIL_BASE}>`,
         text,
         html: ``,
         subject,

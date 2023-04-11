@@ -10,6 +10,7 @@ import http, { Server } from "http";
 import Redis from "ioredis";
 import { buildSchema } from "type-graphql";
 import "websocket-polyfill";
+import { envapi } from "../_env";
 import { appmethod } from "../app";
 import { routermethod } from "../app/router";
 import { ClassesApi } from "../classes";
@@ -23,9 +24,9 @@ import { ShakaGraph0003 } from "../resolvers/numeric/0003/shaka-graph-0003-resol
 import { ShakaGraphTeamAdd } from "../resolvers/team/add/shaka-graph-team-add-resolver";
 import { ShakaGraphTeamLoginAttempt } from "../resolvers/team/login-attempt/shaka-graph-team-login-attempt-resolver";
 import { ShakaGraphTeamLoginConfirm } from "../resolvers/team/login-confirm/shaka-graph-team-login-confirm-resolver";
+import { ShakaGraphTeamMailReply } from "../resolvers/team/mail-reply/shaka-graph-team-mail-reply-resolver";
 import { ShakaGraphTeamSessionHydrate } from "../resolvers/team/session-hydrate/shaka-graph-team-session-hydrate-resolver";
 import { ShakaGraphTeamSessionValidation } from "../resolvers/team/session-validation/shaka-graph-team-session-validation-resolver";
-import { envapi } from "../_env";
 import { TypesServerContext } from "./types";
 
 const { PROD, ENV } = env;
@@ -57,6 +58,7 @@ export const server = async (
         ShakaGraphTeamLoginConfirm,
         ShakaGraphTeamSessionHydrate,
         ShakaGraphTeamSessionValidation,
+        ShakaGraphTeamMailReply,
       ],
       scalarsMap: [],
       validate: false,

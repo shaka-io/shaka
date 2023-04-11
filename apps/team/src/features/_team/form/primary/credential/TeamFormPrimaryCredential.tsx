@@ -36,13 +36,13 @@ export const TeamFormPrimaryCredential: React.FC<
   return (
     <>
       <div
-        className={`flex flex-row rounded-lg w-full h-12 bg-secondary opacity-90 items-center justify-between space-x-3 px-2`}
+        className={`flex flex-row rounded-lg w-full h-16 bg-secondary opacity-90 items-center justify-between space-x-3 px-2`}
       >
         <input
           type={"text"}
-          placeholder={`${t(`glossary:login`, `credential`)}`}
+          placeholder={`${t(`glossary:`, `enter credential`)}`}
           value={LoginShape.bundles.PrimaryCredential.letters}
-          className={`input input-ghost bg-shaka-secondary_relief flex-1 h-8 font-apercu font-bold text-sm text-center font-medium text-secondary-content text-opacity-50 focus:text-secondary-content text-lg placeholder:text-secondary-content placeholder:text-opacity-50 placeholder:uppercase accent-blue-400 caret-pink-300 focus:outline-0 opacity-80`}
+          className={`input input-ghost bg-shaka-secondary_relief flex-1 h-10 font-apercu font-bold text-sm text-center font-medium text-secondary-content text-opacity-50 focus:text-secondary-content text-lg placeholder:text-secondary-content placeholder:text-opacity-50 placeholder:uppercase accent-blue-400 caret-pink-300 focus:outline-0 opacity-80`}
           onChange={({ target: { value } }) =>
             lcTeamFormPrimaryCredentialInput(value)
           }

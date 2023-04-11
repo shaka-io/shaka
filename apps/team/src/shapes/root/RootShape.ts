@@ -13,8 +13,12 @@ export type TypesRootShapeValue = {
   //
 
   basiskey: TypesShakaBasisKeyOpts;
-
   networkfound: boolean;
+  credential: string | undefined;
+  visibleReply: boolean;
+  replyArr: [string, string, string];
+  replyMessage: string;
+  replySent: boolean;
 };
 
 export type TypesRootShape = {
@@ -32,6 +36,11 @@ const initialState: TypesRootShape = {
     basiskey: "root",
 
     networkfound: false,
+    visibleReply: false,
+    credential: undefined,
+    replyArr: [``, ``, ``],
+    replyMessage: ``,
+    replySent: false,
   },
 };
 
@@ -96,6 +105,47 @@ export const RootShapeSlice = createSlice({
         networkfound: action.payload,
       };
     },
+
+    writeRootShapeVisibleReply: (
+      state,
+      { payload }: PayloadAction<boolean>
+    ) => {
+      state.value = {
+        ...state.value,
+        visibleReply: payload,
+      };
+    },
+
+    writeRootShapeReplyArr: (
+      state,
+      { payload }: PayloadAction<[string, string, string]>
+    ) => {
+      state.value = {
+        ...state.value,
+        replyArr: payload,
+      };
+    },
+
+    writeRootShapeReplyMessage: (state, { payload }: PayloadAction<string>) => {
+      state.value = {
+        ...state.value,
+        replyMessage: payload,
+      };
+    },
+
+    writeRootShapeCredential: (state, { payload }: PayloadAction<string>) => {
+      state.value = {
+        ...state.value,
+        credential: payload,
+      };
+    },
+
+    writeRootShapeReplySent: (state, { payload }: PayloadAction<boolean>) => {
+      state.value = {
+        ...state.value,
+        replySent: payload,
+      };
+    },
   },
 });
 
@@ -110,6 +160,11 @@ export const {
   //
   writeRootShapeBasisKey,
   writeRootShapeNetworkFound,
+  writeRootShapeCredential,
+  writeRootShapeVisibleReply,
+  writeRootShapeReplyArr,
+  writeRootShapeReplyMessage,
+  writeRootShapeReplySent,
 } = RootShapeSlice.actions;
 
 export const ofRootShape = (state: TypesShakaShape): TypesRootShapeValue =>

@@ -1,7 +1,15 @@
 import { ShakaFooter } from "@shaka-team-components/footer/ShakaFooter";
 import { ShakaNavigation } from "@shaka-team-components/navigation/ShakaNavigation";
+import { TeamSessionReply } from "@shaka-team-features/session/reply/TeamSessionReply";
 import { useLocale } from "@shaka-team-hooks/use-locale";
 import { useShakaGraphTeamSessionHydrateQuery } from "@shaka-team-library/graph/hooks";
+import { useFold, useShape } from "@shaka-team-shapes/hooks";
+import {
+  ofRootShape,
+  writeRootShapeCredential,
+  writeRootShapeReplyArr,
+  writeRootShapeVisibleReply,
+} from "@shaka-team-shapes/root/RootShape";
 import { TypesShakaBasis } from "@shaka-team-types/basis/TypesShakaBasis";
 import { DateTime } from "luxon";
 import { useTranslation } from "next-i18next";
@@ -18,8 +26,11 @@ export const TeamSession: React.FC<TypesTeamSession> = ({
 }: TypesTeamSession) => {
   useTranslation(basis.dictionary);
 
+  const fold = useFold();
   const locale = useLocale();
   const router = useRouter();
+
+  const RootShape = useShape(ofRootShape);
 
   const {
     data: graphTeamSessionHydrated,
@@ -32,6 +43,37 @@ export const TeamSession: React.FC<TypesTeamSession> = ({
       },
     },
   });
+
+  React.useEffect(() => {
+    //
+    // @notes:
+    if (graphTeamSessionHydrated?.ShakaGraphTeamSessionHydrate.data?.read) {
+      fold(
+        writeRootShapeCredential(
+          graphTeamSessionHydrated.ShakaGraphTeamSessionHydrate.data.read
+            .credential
+        )
+      );
+    }
+
+    // end
+    return;
+  }, [
+    fold,
+    graphTeamSessionHydrated?.ShakaGraphTeamSessionHydrate?.data?.read,
+  ]);
+
+  const lcTeamSessionReplyToggle = React.useCallback(
+    (b: boolean, sArr: [string, string, string]) => {
+      //
+      // @notes:
+      fold(writeRootShapeVisibleReply(b));
+      fold(writeRootShapeReplyArr(sArr));
+      // end
+      return;
+    },
+    [fold]
+  );
 
   return (
     <>
@@ -152,73 +194,114 @@ export const TeamSession: React.FC<TypesTeamSession> = ({
                                 </div>
                               </div>
 
-                              {graphTeamSessionHydrated?.ShakaGraphTeamSessionHydrate.data.emails.map(
-                                (email) => {
-                                  return (
-                                    <div
-                                      key={email.key}
-                                      className={`grid grid-cols-16 gap-4 hover:bg-shaka-secondary_relief opacity-60 cursor-pointer py-2 px-3 rounded-lg`}
-                                    >
-                                      <div
-                                        className={`max-lg:col-span-4 col-span-2 flex `}
-                                      >
-                                        <p
-                                          className={`font-apercu font-medium text-base text-secondary-focus font-bold`}
-                                        >
-                                          {`${DateTime.fromMillis(
-                                            Number(email.created)
-                                          )
-                                            .setLocale(router.locale || locale)
-                                            .toLocaleString(
-                                              DateTime.TIME_SIMPLE
-                                            )}`}
-                                        </p>
-                                      </div>
+                              {RootShape.visibleReply ? (
+                                <>
+                                  <TeamSessionReply
+                                    basis={{
+                                      ...basis,
+                                      reply: RootShape.replyArr,
+                                    }}
+                                  />
+                                </>
+                              ) : null}
 
+                              {!RootShape.visibleReply &&
+                                graphTeamSessionHydrated?.ShakaGraphTeamSessionHydrate.data.emails.map(
+                                  (email) => {
+                                    return (
                                       <div
-                                        className={`max-lg:col-span-12 col-span-4 flex `}
+                                        key={email.key}
+                                        className={`grid grid-cols-16 gap-4 hover:bg-shaka-secondary_relief opacity-60 cursor-pointer py-2 px-3 rounded-lg items-center`}
                                       >
-                                        <p
-                                          className={`font-apercu font-medium text-base text-secondary-focus font-bold truncate`}
+                                        <div
+                                          className={`max-lg:col-span-4 col-span-2 flex `}
                                         >
-                                          {email.address}
-                                        </p>
-                                      </div>
+                                          <p
+                                            className={`font-apercu font-medium text-base text-secondary-focus font-bold`}
+                                          >
+                                            {`${DateTime.fromMillis(
+                                              Number(email.created)
+                                            )
+                                              .setLocale(
+                                                router.locale || locale
+                                              )
+                                              .toLocaleString(
+                                                DateTime.TIME_SIMPLE
+                                              )}`}
+                                          </p>
+                                        </div>
 
-                                      <div
-                                        className={`max-lg:col-span-15 col-span-10 flex`}
-                                      >
-                                        <div className={"collapse flex-1"}>
-                                          <input type={"checkbox"} />
-                                          <div
-                                            className={
-                                              "collapse-title flex flex-row text-xl font-medium w-full "
-                                            }
+                                        <div
+                                          className={`max-lg:col-span-12 col-span-4 flex `}
+                                        >
+                                          <p
+                                            className={`font-apercu font-medium text-base text-secondary-focus font-bold truncate`}
                                           >
-                                            <p
-                                              className={`font-apercu font-medium text-base text-secondary-focus font-bold truncate`}
+                                            {email.address}
+                                          </p>
+                                        </div>
+
+                                        <div
+                                          className={`max-lg:col-span-15 col-span-10 flex`}
+                                        >
+                                          <div className={"collapse flex-1"}>
+                                            <input type={"checkbox"} />
+                                            <div
+                                              className={
+                                                "collapse-title flex flex-row text-xl font-medium w-full "
+                                              }
                                             >
-                                              {email.records?.subject ||
-                                                `(no subject)`}
-                                            </p>
-                                          </div>
-                                          <div
-                                            className={
-                                              "collapse-content px-6 flex-1"
-                                            }
-                                          >
-                                            <p
-                                              className={`font-apercu font-medium text-base text-secondary-focus font-bold break-words`}
+                                              <p
+                                                className={`font-apercu font-medium text-base text-secondary-focus font-bold truncate`}
+                                              >
+                                                {email.records?.subject ||
+                                                  `(no subject)`}
+                                              </p>
+                                            </div>
+                                            <div
+                                              className={
+                                                "collapse-content px-6 flex-1"
+                                              }
                                             >
-                                              {email.records?.text}
-                                            </p>
+                                              <div className={`flex flex-col `}>
+                                                <p
+                                                  className={`font-apercu font-medium text-base text-secondary-focus font-bold break-words`}
+                                                >
+                                                  {email.records?.text}
+                                                </p>
+                                                <div
+                                                  className={`flex flex-row justify-end`}
+                                                >
+                                                  <button
+                                                    type={`button`}
+                                                    className={
+                                                      "btn btn-secondary "
+                                                    }
+                                                    onClick={() =>
+                                                      lcTeamSessionReplyToggle(
+                                                        true,
+                                                        [
+                                                          email.address,
+                                                          email.records
+                                                            ?.subject ||
+                                                            `(no subject)`,
+                                                          email.records?.text ||
+                                                            ``,
+                                                        ]
+                                                      )
+                                                    }
+                                                  >
+                                                    {`reply`}
+                                                  </button>
+                                                </div>
+                                              </div>
+                                            </div>
                                           </div>
                                         </div>
                                       </div>
-                                    </div>
-                                  );
-                                }
-                              )}
+                                    );
+                                  }
+                                )}
                             </div>
                           </>
                         ) : null}

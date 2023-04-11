@@ -77,6 +77,7 @@ export type Mutation = {
   ShakaGraphTeamAdd: ShakaGraphResolveTeamAdd;
   ShakaGraphTeamLoginAttempt: ShakaGraphResolveTeamLoginAttempt;
   ShakaGraphTeamLoginConfirm: ShakaGraphResolveTeamLoginConfirm;
+  ShakaGraphTeamMailReply: ShakaGraphResolveTeamMailReply;
 };
 
 export type MutationShakaGraph0001Args = {
@@ -105,6 +106,10 @@ export type MutationShakaGraphTeamLoginAttemptArgs = {
 
 export type MutationShakaGraphTeamLoginConfirmArgs = {
   figure: ShakaGraphFiguresTeamLoginConfirm;
+};
+
+export type MutationShakaGraphTeamMailReplyArgs = {
+  figure: ShakaGraphFiguresTeamMailReply;
 };
 
 export type Query = {
@@ -192,6 +197,11 @@ export type ShakaGraphDataTeamLoginConfirm = {
   notes?: Maybe<Array<Scalars["String"]>>;
 };
 
+export type ShakaGraphDataTeamMailReply = {
+  __typename?: "ShakaGraphDataTeamMailReply";
+  notes?: Maybe<Array<Scalars["String"]>>;
+};
+
 export type ShakaGraphDataTeamSessionHydrate = {
   __typename?: "ShakaGraphDataTeamSessionHydrate";
   emails?: Maybe<Array<Email>>;
@@ -255,6 +265,15 @@ export type ShakaGraphFiguresTeamLoginConfirm = {
   credential: Scalars["String"];
   locale: Scalars["String"];
   passcode: Scalars["String"];
+};
+
+export type ShakaGraphFiguresTeamMailReply = {
+  from: Scalars["String"];
+  locale: Scalars["String"];
+  msg: Scalars["String"];
+  msgPrev: Scalars["String"];
+  subject: Scalars["String"];
+  to: Scalars["String"];
 };
 
 export type ShakaGraphFiguresTeamSessionHydrate = {
@@ -365,6 +384,16 @@ export type ShakaGraphResolveTeamLoginConfirm = {
   timestamp: Scalars["Float"];
 };
 
+export type ShakaGraphResolveTeamMailReply = {
+  __typename?: "ShakaGraphResolveTeamMailReply";
+  data?: Maybe<ShakaGraphDataTeamMailReply>;
+  hash: Scalars["String"];
+  message?: Maybe<Scalars["String"]>;
+  pass: Scalars["Boolean"];
+  ray: Scalars["String"];
+  timestamp: Scalars["Float"];
+};
+
 export type ShakaGraphResolveTeamSessionHydrate = {
   __typename?: "ShakaGraphResolveTeamSessionHydrate";
   data?: Maybe<ShakaGraphDataTeamSessionHydrate>;
@@ -453,6 +482,25 @@ export type ShakaGraphTeamLoginConfirmMutation = {
     hash: string;
     data?: {
       __typename?: "ShakaGraphDataTeamLoginConfirm";
+      notes?: Array<string> | null;
+    } | null;
+  };
+};
+
+export type ShakaGraphTeamMailReplyMutationVariables = Exact<{
+  figure: ShakaGraphFiguresTeamMailReply;
+}>;
+
+export type ShakaGraphTeamMailReplyMutation = {
+  __typename?: "Mutation";
+  ShakaGraphTeamMailReply: {
+    __typename?: "ShakaGraphResolveTeamMailReply";
+    pass: boolean;
+    message?: string | null;
+    timestamp: number;
+    hash: string;
+    data?: {
+      __typename?: "ShakaGraphDataTeamMailReply";
       notes?: Array<string> | null;
     } | null;
   };
@@ -701,6 +749,62 @@ export type ShakaGraphTeamLoginConfirmMutationOptions =
     ShakaGraphTeamLoginConfirmMutation,
     ShakaGraphTeamLoginConfirmMutationVariables
   >;
+export const ShakaGraphTeamMailReplyDocument = gql`
+  mutation ShakaGraphTeamMailReply($figure: ShakaGraphFiguresTeamMailReply!) {
+    ShakaGraphTeamMailReply(figure: $figure) {
+      pass
+      message
+      timestamp
+      hash
+      data {
+        notes
+      }
+    }
+  }
+`;
+export type ShakaGraphTeamMailReplyMutationFn = Apollo.MutationFunction<
+  ShakaGraphTeamMailReplyMutation,
+  ShakaGraphTeamMailReplyMutationVariables
+>;
+
+/**
+ * __useShakaGraphTeamMailReplyMutation__
+ *
+ * To run a mutation, you first call `useShakaGraphTeamMailReplyMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useShakaGraphTeamMailReplyMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [shakaGraphTeamMailReplyMutation, { data, loading, error }] = useShakaGraphTeamMailReplyMutation({
+ *   variables: {
+ *      figure: // value for 'figure'
+ *   },
+ * });
+ */
+export function useShakaGraphTeamMailReplyMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    ShakaGraphTeamMailReplyMutation,
+    ShakaGraphTeamMailReplyMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    ShakaGraphTeamMailReplyMutation,
+    ShakaGraphTeamMailReplyMutationVariables
+  >(ShakaGraphTeamMailReplyDocument, options);
+}
+export type ShakaGraphTeamMailReplyMutationHookResult = ReturnType<
+  typeof useShakaGraphTeamMailReplyMutation
+>;
+export type ShakaGraphTeamMailReplyMutationResult =
+  Apollo.MutationResult<ShakaGraphTeamMailReplyMutation>;
+export type ShakaGraphTeamMailReplyMutationOptions = Apollo.BaseMutationOptions<
+  ShakaGraphTeamMailReplyMutation,
+  ShakaGraphTeamMailReplyMutationVariables
+>;
 export const ShakaGraphTeamSessionHydrateDocument = gql`
   query ShakaGraphTeamSessionHydrate(
     $figure: ShakaGraphFiguresTeamSessionHydrate!
